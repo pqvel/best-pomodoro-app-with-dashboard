@@ -1,0 +1,15 @@
+$blue-dark: #11111D;
+$gray-hover: #4a536b;
+$white: #FFFFFF;
+
+
+
+:root[data-theme="dark"] {
+  --aside-bg: #{$blue-dark};
+  --aside-color: #{$white};
+  --aside-bg-hover: #{$gray-hover};
+}
+
+:root[data-theme="dark"] {
+  --background-color: #2b3e51;
+}

@@ -1,0 +1,23 @@
+.aside {
+  background-color: var(--aside-bg);
+  min-width: 320px;
+  
+  &__nav-link {
+    color: var(--aside-color);
+    padding: 14px 16px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--aside-bg-hover);
+    }
+
+    &--active {
+      color: var(--aside-bg);
+      background-color: var(--aside-color);
+
+      &:hover {
+        background-color: var(--aside-color);
+      }
+    }
+  }
+}

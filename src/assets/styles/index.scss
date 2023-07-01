@@ -1,3 +1,19 @@
+// @import './global/themes';
+@import './global/colors';
+
+body {
+  overflow: hidden;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+:root {
+  --header-height: 60px;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
