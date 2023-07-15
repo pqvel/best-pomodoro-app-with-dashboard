@@ -1,4 +1,37 @@
 .timer {
   max-width: 500px;
   max-height: 400px;
+  // background: #BA4949;
+  border-radius: 32px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+
+  &__result {
+    color: #ffff;
+    font-size: 128px;
+    height: 100%;
+  }
+
+  &__btn {
+    background-color: white;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-weight: 600;
+  }
+}
+
+.red {
+  background: #BA4949;
+}
+
+.green {
+  background: #38858A;
+}
+
+.blue {
+  background: #397097;
 }

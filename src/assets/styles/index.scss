@@ -13,6 +13,10 @@ html, body, #root {
   --header-height: 60px;
 }
 
+li {
+  list-style: none;
+}
+
 
 @tailwind base;
 @tailwind components;

@@ -11,7 +11,7 @@ const MainTemplate: FC<Props> = ({children}) => (
     <Header/>
     <div className='flex flex-1'>
       <Aside/>
-      <main className='flex flex-col h-full w-full overscroll-y-auto'>
+      <main className='flex p-5 flex-col h-full w-full overscroll-y-auto'>
         {children}
       </main>
     </div>

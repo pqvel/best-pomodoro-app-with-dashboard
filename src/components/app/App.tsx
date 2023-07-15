@@ -1,19 +1,20 @@
+import { useEffect, FC } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import TimerPage from '../pages/TimerPage'
-import { useState, useEffect } from 'react'
-import viteLogo from '/vite.svg'
-// import './App.css'
+import TodosPage from '../pages/Todos'
+import StatsPage from '../pages/Stats'
 
-function App() {
-
-useEffect(() => {
-  document.documentElement.setAttribute("data-theme", "dark")
-}, [])
+const App: FC = () => {
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "dark")
+  }, [])
 
   return (
-    <>
-      <TimerPage/>
-    </>
+    <Routes>
+      <Route path="/" element={<TimerPage />} />
+      <Route path="/todos" element={<TodosPage />} />
+      <Route path="/stats" element={<StatsPage />} />
+    </Routes>
   )
 }
 
