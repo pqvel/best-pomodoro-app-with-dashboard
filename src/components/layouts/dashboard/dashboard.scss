@@ -11,10 +11,19 @@
   }
 
   &__cart {
+    position: relative;
     border-radius: 8px;
     border: 1px solid #E0E0E0;
     padding: 12px;
     background-color: #fff;
+
+    &-settings {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      height: 12px;
+      width: 12px;
+    }
   }
 }
 
@@ -23,6 +32,7 @@
   border: 1px solid #E0E0E0;
   border-radius: 4px;
   padding: 0 12px;
+  min-height: 40px;
 }
 
 .h2 {
@@ -60,4 +70,9 @@
 .button-black {
   background-color: #000000;
   color: #ffffff; 
+}
+
+.button-gray {
+  color: #000000;
+  background-color: #dddddd;
 }

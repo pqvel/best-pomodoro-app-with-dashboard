@@ -1,12 +1,5 @@
 import  { FC, useEffect, useRef, useState } from 'react'
-
-type Props = {
-  children: string | JSX.Element | JSX.Element[],
-  editTextClass: string,
-  value: string
-  editHandler: () => void
-}
-// нужно хранить пред состояние текста
+ fza
 const SwitchTextInput: FC<Props> = ({ children, editTextClass, value, editHandler}) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const editInput = useRef<HTMLInputElement>(null)

@@ -36,7 +36,7 @@ const Timer: FC = () => {
     
     setStatus(TimerStatus.Timer)
     startInterval(() => {
-      setCurrTimeValue(Math.round((startTime + 1500000 - 60000 - new Date().getTime()) / 1000))
+      setCurrTimeValue(Math.round((startTime + 1500000 - 60000 - Date.now()) / 1000))
       if (currTimeValue <= 0) {
         stopInterval()
       }
@@ -58,8 +58,6 @@ const Timer: FC = () => {
     const startTime = new Date().getTime()
     setStatus(TimerStatus.Timer)
     startInterval(() => {
-      alert(currTimeValue)
-      alert(Math.round((currTimeValue - new Date().getTime()) / 1000))
       setCurrTimeValue(Math.round((currTimeValue - new Date().getTime()) / 1000))
       if (currTimeValue <= 0) {
         stopInterval()
