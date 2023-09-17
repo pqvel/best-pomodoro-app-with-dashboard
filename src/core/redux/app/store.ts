@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from '../slices/userSlice';
-import settingsSlice from '../slices/settingsSlice';
+import settingsSlice from '../slices/userSettingsSlice';
 import todosSlice from '../slices/todosSlice';
 
 export const store = configureStore({

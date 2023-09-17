@@ -1,24 +1,23 @@
-import { useState } from "react"
+import { useState } from "react";
 
 type UseIntervalReturnType = {
-  startInterval: (callback: TimerHandler, timeout: number) => void
-  stopInterval: () => void
-}
+  startInterval: (callback: TimerHandler, timeout: number) => void;
+  stopInterval: () => void;
+};
 
 export const useInterval = (): UseIntervalReturnType => {
-  const [timerId, setTimerId] = useState<ReturnType<typeof setInterval>>()
+  let timerId: ReturnType<typeof setInterval>;
 
   const startInterval = (callback: TimerHandler, timeout: number): void => {
-    const timer = setInterval(callback, timeout)
-    setTimerId(timer)
-  }
+    timerId = setInterval(callback, timeout);
+  };
 
   const stopInterval = (): void => {
-    clearInterval(timerId)
-  }
+    clearInterval(timerId);
+  };
 
   return {
     startInterval,
-    stopInterval
-  }
-}
+    stopInterval,
+  };
+};

@@ -8,11 +8,11 @@ export interface User {
 }
 
 const initialState: Array<User> = [
-    {
-        id: '1',
-        name: 'John Doe',
-        email: 'john@test.com',
-    }
+  {
+      id: '1',
+      name: 'John Doe',
+      email: 'john@test.com',
+  }
 ]
 
 export const userSlice = createSlice({
