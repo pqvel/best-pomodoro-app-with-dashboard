@@ -1,6 +1,6 @@
 import  { FC } from 'react'
 import MainTemplate from '../templates/MainTemplate'
-import Dashboard from '../layouts/dashboard/Dashboard'
+import Dashboard from '../dashboard/Dashboard'
 
 const TodosPage: FC = () => (
   <MainTemplate>
