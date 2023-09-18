@@ -15,6 +15,11 @@ const SwitchTextInput: FC<Props> = ({
 }) => {
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const editInput = useRef<HTMLInputElement>(null);
+	const editButton = useRef<HTMLButtonElement>(null);
+
+	const changeHandler = () => {
+		editButton.current!.disabled = editInput.current!.value === "";
+	};
 
 	const toggleEditText = () => {
 		setIsEdit((isEdit) => !isEdit);
@@ -27,9 +32,7 @@ const SwitchTextInput: FC<Props> = ({
 	};
 
 	useEffect(() => {
-		if (isEdit) {
-			editInput.current?.focus();
-		}
+		if (isEdit) editInput.current?.focus();
 	}, [isEdit]);
 
 	if (isEdit) {
@@ -38,10 +41,15 @@ const SwitchTextInput: FC<Props> = ({
 				<input
 					ref={editInput}
 					className={editTextClass + " mb-2"}
+					onChange={changeHandler}
 					defaultValue={value}
 				/>
 				<div className="flex gap-2">
-					<button className="button button-black" onClick={confirmChanges}>
+					<button
+						ref={editButton}
+						className="button button-black"
+						onClick={confirmChanges}
+					>
 						Сохранить
 					</button>
 					<button className="button button-gray" onClick={toggleEditText}>

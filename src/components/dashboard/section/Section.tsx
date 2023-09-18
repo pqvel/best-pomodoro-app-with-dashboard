@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import SwitchTextInput from "../../switchTextInput/SwitchTextInput";
 import Todo from "../todo/Todo";
 import {
 	SectionType,
 	changeSectionTitle,
+	deleteSection,
 } from "../../../core/redux/slices/dashboardSlice";
 import Icons from "../../../assets/img/icons.svg";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
@@ -37,7 +38,13 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
 					</h3>
 					<span onClick={(e) => e.stopPropagation()}>2</span>
 					<button onClick={(e) => e.stopPropagation()}>
-						<svg width={24} height={24}>
+						<svg
+							width={24}
+							height={24}
+							onClick={() =>
+								dispatch(deleteSection({ dashboardId, sectionId: section.id }))
+							}
+						>
 							<use href={`${Icons}#icon-trash`}></use>
 						</svg>
 					</button>
