@@ -1,49 +1,55 @@
-import { FC, useRef } from "react";
+import { ChangeEvent, KeyboardEvent, FC, useRef, useState } from "react";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import { addSection } from "../../../core/redux/slices/dashboardSlice";
 
 const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
-	const dispatch = useAppDispatch();
-	const input = useRef<HTMLInputElement>(null);
-	const addButton = useRef<HTMLButtonElement>(null);
+  const dispatch = useAppDispatch();
+  const input = useRef<HTMLInputElement>(null);
+  const [isDisabledBtn, setDisabledBtn] = useState<boolean>(true);
 
-	const changeHandler = () => {
-		addButton.current!.disabled = input.current!.value === "";
-	};
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setDisabledBtn(e.target.value === "");
+  };
 
-	const addSectionHandler = () => {
-		dispatch(addSection({ dashboardId, title: input.current!.value }));
-		resetInput();
-	};
+  const enterHandler = (
+    e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>
+  ) => {
+    if (e.key === "Enter") addSectionHandler();
+  };
 
-	const resetInput = () => {
-		input.current!.value = "";
-		input.current!.disabled = true;
-	};
+  const addSectionHandler = () => {
+    dispatch(addSection({ dashboardId, title: input.current!.value }));
+    resetInput();
+  };
 
-	return (
-		<div className="dashboard__section flex flex-col">
-			<input
-				className="input mb-2"
-				ref={input}
-				onChange={changeHandler}
-				placeholder="Название раздела"
-				type="text"
-				maxLength={50}
-			/>
-			<div className="flex gap-2">
-				<button
-					className="button button-black"
-					onClick={addSectionHandler}
-					ref={addButton}
-					disabled
-				>
-					Добавить раздел
-				</button>
-				<button onClick={resetInput}>Отмена</button>
-			</div>
-		</div>
-	);
+  const resetInput = () => {
+    input.current!.value = "";
+    setDisabledBtn(true);
+  };
+
+  return (
+    <div className="dashboard__section flex flex-col">
+      <input
+        className="input mb-2"
+        ref={input}
+        onChange={changeHandler}
+        onKeyDown={enterHandler}
+        placeholder="Название раздела"
+        type="text"
+        maxLength={50}
+      />
+      <div className="flex gap-2">
+        <button
+          className="button button-black"
+          onKeyDown={enterHandler}
+          disabled={isDisabledBtn}
+        >
+          Добавить раздел
+        </button>
+        <button onClick={resetInput}>Отмена</button>
+      </div>
+    </div>
+  );
 };
 
 export default AddSection;

@@ -7,6 +7,9 @@ export default {
     },
     colors: {
       green: "#34a853",
+      black: "#000000",
+      white: "#ffffff",
+      grayBorder: "#dadada",
     },
   },
   plugins: [],
