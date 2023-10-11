@@ -6,14 +6,12 @@ import AddSection from "./addSection/AddSection";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { changeDashboardTitle } from "../../core/redux/slices/dashboardSlice";
 import "./dashboard.scss";
-import AddTodoPopup from "../popups/addTodoPopup/AddTodoPopup";
 
 const Dashboard: FC = () => {
   const dashboard = useAppSelector((state) => state.dashboard[0]);
   const dispatch = useAppDispatch();
   return (
     <>
-      <AddTodoPopup />
       <section className="dashboard flex flex-col h-full overflow-x-auto w-full cursor-grab">
         <SwitchTextInput
           editTextClass="input h2 mb-5"

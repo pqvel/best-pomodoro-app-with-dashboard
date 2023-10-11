@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Icons from "../../../assets/img/icons.svg";
-
+// переименовать на эд туду батон
 type Props = {
   addHandler: () => void;
 };

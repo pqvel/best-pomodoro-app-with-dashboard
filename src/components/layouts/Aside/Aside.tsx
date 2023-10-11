@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState, MouseEvent, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Icons from "../../../assets/img/icons.svg";
 import "./aside.scss";
+import { useResizeElement } from "../../../core/hooks/useResizeElement";
 
 interface INavItem {
   href: string;
@@ -28,20 +29,25 @@ const navItems: INavItem[] = [
 ];
 
 const Aside: FC = () => {
-  const [count, setCount] = useState<number>(0);
-
+  const { width, mouseDownHandler, mouseMoveHandler, mouseUpHandler } =
+    useResizeElement({
+      maxWidth: 320,
+      minWidth: 60,
+      initialWidth: 320,
+    });
   return (
-    <aside className="aside p-5 flex flex-col h-full">
+    <aside
+      className="aside p-5 flex flex-col h-full"
+      onMouseDown={mouseDownHandler}
+      onMouseMove={mouseMoveHandler}
+      onMouseUp={mouseUpHandler}
+      style={{ width }}
+    >
       <nav className="aside__nav flex flex-col gap-4">
         <ul className="flex flex-col gap-4">
           {navItems.map(({ href, iconPath, title }) => (
-            <li>
-              <NavItem
-                href={href}
-                iconPath={iconPath}
-                title={title}
-                key={title}
-              />
+            <li key={title}>
+              <NavItem href={href} iconPath={iconPath} title={title} />
             </li>
           ))}
         </ul>

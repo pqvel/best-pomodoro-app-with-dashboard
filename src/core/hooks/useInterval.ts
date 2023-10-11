@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type UseIntervalReturnType = {
   startInterval: (callback: TimerHandler, timeout: number) => void;
   stopInterval: () => void;
