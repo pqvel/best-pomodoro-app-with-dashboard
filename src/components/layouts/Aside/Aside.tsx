@@ -1,9 +1,14 @@
-import { FC, useRef, useState, MouseEvent, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Icons from "../../../assets/img/icons.svg";
 import "./aside.scss";
 import { useResizeElement } from "../../../core/hooks/useResizeElement";
 
+/**
+ * @todo
+ * - разделить на страницы только main
+ * - сделать isResize только по 2 клику
+ */
 interface INavItem {
   href: string;
   iconPath: string;
@@ -29,19 +34,21 @@ const navItems: INavItem[] = [
 ];
 
 const Aside: FC = () => {
-  const { width, mouseDownHandler, mouseMoveHandler, mouseUpHandler } =
-    useResizeElement({
-      maxWidth: 320,
-      minWidth: 60,
-      initialWidth: 320,
-    });
+  const {
+    resizeElement,
+    initResizeElement,
+    mouseDownHandler,
+    destroyResizeElement,
+  } = useResizeElement();
+
+  useEffect(() => {
+    initResizeElement();
+    return destroyResizeElement();
+  }, []);
   return (
     <aside
-      className="aside p-5 flex flex-col h-full"
-      onMouseDown={mouseDownHandler}
-      onMouseMove={mouseMoveHandler}
-      onMouseUp={mouseUpHandler}
-      style={{ width }}
+      ref={resizeElement}
+      className="aside relative p-5 flex flex-col h-full max-w-[320px] min-w-[94px]"
     >
       <nav className="aside__nav flex flex-col gap-4">
         <ul className="flex flex-col gap-4">
@@ -61,6 +68,10 @@ const Aside: FC = () => {
           </ul>
         </div>
       </nav>
+      <div
+        className=" absolute right-0 top-0 h-full w-2 bg-white opacity-0 hover:opacity-50"
+        onMouseDown={mouseDownHandler}
+      ></div>
     </aside>
   );
 };
@@ -76,9 +87,9 @@ const NavItem: FC<INavItem> = ({ href, iconPath, title }) => (
     }
     to={href}
   >
-    <svg className="text-red" width={30} height={30}>
+    <svg className="text-red min-w-[30px] max-h-[30px]" width={30} height={30}>
       <use href={iconPath}></use>
     </svg>
-    {title}
+    <span className="truncate">{title}</span>
   </NavLink>
 );

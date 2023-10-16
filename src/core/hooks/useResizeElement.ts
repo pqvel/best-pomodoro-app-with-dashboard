@@ -1,64 +1,83 @@
-import { useState, MouseEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  EventHandler,
+  RefObject,
+  MouseEvent as ReactMouseEvent,
+} from "react";
 
 type UseResizeElementParams = {
-  minWidth: number;
-  maxWidth: number;
-  initialWidth: number;
+  // initialWidth: number;
 };
 
 type UseResizeElementReturn = {
-  width: number;
-  mouseMoveHandler: (e: MouseEvent<HTMLElement>) => void;
-  mouseDownHandler: (e: MouseEvent<HTMLElement>) => void;
-  mouseUpHandler: (e: MouseEvent<HTMLElement>) => void;
+  resizeElement: ReturnType<typeof useRef>;
+  initResizeElement: () => void;
+  destroyResizeElement: () => void;
+  mouseDownHandler: EventHandler<ReactMouseEvent>;
 };
 
-type UseResizeElementType = (
-  params: UseResizeElementParams
-) => UseResizeElementReturn;
+type UseResizeElement = () => UseResizeElementReturn;
 
-export const useResizeElement: UseResizeElementType = ({
-  maxWidth,
-  minWidth,
-  initialWidth,
-}): UseResizeElementReturn => {
-  //   const [isResizing, setResizing] = useState<boolean>(false);
-  const [countMouseDown, setCountMouseDown] = useState<number>(0);
-  const [isCanResize, setCanResize] = useState<boolean>(false);
+/**
+ * Хук который позволяет пользователю изменять ширину элементов, например бокового меню
+ * Чтобы задать максимальное и минимальное значение элемента
+ * нужно прописать стили min-width и max-width
+ * @param {number} initialWidth - начальный размер элемента
+ *
+ */
+export const useResizeElement: UseResizeElement = () => {
+  const resizeElement = useRef<HTMLElement>();
+  const isResized = useRef<any>(false);
+  const mouseDownHandler: EventHandler<ReactMouseEvent> = () => {
+    isResized.current = true;
+  };
 
-  let timeoutId: ReturnType<typeof setTimeout>;
-
-  const [width, setWidth] = useState<number>(initialWidth);
-  const [mouseDownCoords, setMouseDownCoords] = useState();
-
-  const mouseMoveHandler = (e: MouseEvent<HTMLElement>) => {
-    if (isCanResize) {
-      // нужно отнимать от mouseDownCoords координаты события мув
-      setWidth(e.clientX);
+  const mouseMoveHandler = (e: MouseEvent): void => {
+    console.log(isResized.current);
+    if (isResized.current) {
+      const element = resizeElement.current;
+      element!.style.width = `${element!.offsetWidth}${e.movementX}px`;
     }
   };
 
-  const mouseDownHandler = (e: MouseEvent<HTMLElement>) => {
-    setCountMouseDown((countMouseDown) => countMouseDown + 1);
-    console.log(countMouseDown);
-    if (countMouseDown === 2) {
-      return setCanResize(true);
-    }
-
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      setCountMouseDown(0);
-    }, 1000);
+  /**
+   * Обработик события клика на элементе после которого начинается изменение
+   * ширины resizeElement
+   */
+  const mouseUpHandler = (): void => {
+    isResized.current = false;
   };
 
-  const mouseUpHandler = () => {
-    setCanResize(false);
+  /**
+   * Добавляет слушатели событий mousemove и mouseup на документ,
+   * @example
+   * useEffect(() => {
+   *    initResizeElement()
+   * }, [])
+   */
+  const initResizeElement = () => {
+    document.addEventListener("mousemove", (e) => mouseMoveHandler(e));
+    document.addEventListener("mouseup", () => mouseUpHandler());
+  };
+
+  /**
+   * Удаляет слушатели событий mousemove и mouseup у документа,
+   * @example
+   * useEffect(() => {
+   *    return destroyResizeElement()
+   * }, [])
+   */
+  const destroyResizeElement = () => {
+    document.removeEventListener("mousemove", mouseMoveHandler);
+    document.removeEventListener("mouseup", mouseUpHandler);
   };
 
   return {
-    width,
-    mouseMoveHandler,
+    resizeElement,
+    initResizeElement,
+    destroyResizeElement,
     mouseDownHandler,
-    mouseUpHandler,
   };
 };

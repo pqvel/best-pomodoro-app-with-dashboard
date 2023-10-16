@@ -1,11 +1,14 @@
 // @import './global/themes';
-@import './global/colors';
+@import "./global/colors";
 
 body {
   overflow: hidden;
+  user-select: none;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -16,7 +19,6 @@ html, body, #root {
 li {
   list-style: none;
 }
-
 
 @tailwind base;
 @tailwind components;
