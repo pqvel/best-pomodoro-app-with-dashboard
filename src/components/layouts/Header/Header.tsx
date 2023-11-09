@@ -1,14 +1,11 @@
-import { FC } from "react"
-import './header.scss'
-const Header: FC = () => {
+import { FC } from "react";
 
+const Header: FC = () => {
   return (
     <>
-      <header className="header">
-        dfwfwf
-      </header>
+      <header className="bg-black min-h-[60px]">dfwfwf</header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

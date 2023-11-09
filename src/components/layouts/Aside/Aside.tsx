@@ -31,6 +31,11 @@ const navItems: INavItem[] = [
     iconPath: `${Icons}#icon-stats`,
     title: "Stats",
   },
+  {
+    href: "/info",
+    iconPath: `${Icons}#icon-book`,
+    title: "Техника Pomodoro",
+  },
 ];
 
 const Aside: FC = () => {
