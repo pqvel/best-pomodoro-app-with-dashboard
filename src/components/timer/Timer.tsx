@@ -1,13 +1,9 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { useInterval } from "../../core/hooks/useInterval";
-import { userSettingsSelector } from "../../core/redux/slices/userSettingsSlice";
-import "./timer.scss";
-import { useAppSelector } from "../../core/redux/app/hooks";
+import { Settings } from "../../core/redux/slices/userSettingsSlice";
 
-enum TimerMode {
-  Pomodoro = "POMODORO",
-  Timer = "TIMER",
-}
+import Button from "../ui/Button";
+import { useAppSelector } from "../../core/redux/app/hooks";
 
 enum TimerStatus {
   Break = "BREAK",
@@ -81,10 +77,12 @@ const Timer: FC = () => {
       }
     }, 1000);
   };
-  const bgColorClass = status === TimerStatus.Break ? "bg-green" : "red";
+  const bgColorClass = status === TimerStatus.Break ? "bg-green" : "bg-red";
   return (
-    <div className={`timer w-full h-full m-auto ${bgColorClass}`}>
-      <TimerDisplay time={currTimeValue} />
+    <div
+      className={`flex flex-col gap-5 items-center justify-center rounded-lg p-5 shadow-md shadow-gray ${bgColorClass}`}
+    >
+      <TimerDisplay time={currTimeValue} settings={settings} />
       <TimerButtons
         status={status}
         startHadnler={start}
@@ -97,13 +95,22 @@ const Timer: FC = () => {
   );
 };
 
-const TimerDisplay: FC<{ time: number }> = ({ time }) => {
+const TimerDisplay: FC<{ time: number; settings: Settings }> = ({
+  time,
+  settings,
+}) => {
   const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
   const seconds = `${time % 60}`.padStart(2, "0");
 
   return (
-    <div className="timer__result flex justify-center items-center">
-      {minutes}:{seconds}
+    <div className="flex flex-col gap-4">
+      <div className="text-9xl text-white font-semibold">
+        {minutes}:{seconds}
+      </div>
+      <div className="  text-lg text-white font-semibold">
+        До большого перерыва {settings.countPomodors - settings.currentPomodoro}{" "}
+        помидора
+      </div>
     </div>
   );
 };
@@ -127,63 +134,52 @@ const TimerButtons: FC<TimerButtonsProps> = ({
 }) => {
   if (status === TimerStatus.Timer) {
     return (
-      <div className="flex justify-around">
-        <button className="timer__btn" onClick={pauseHandler}>
+      <div className="flex items-center justify-around gap-3">
+        <Button onClick={pauseHandler} theme="white">
           Пауза
-        </button>
-        <button className="timer__btn" onClick={stopHandler}>
+        </Button>
+        <Button onClick={stopHandler} theme="black">
           Закончить
-        </button>
+        </Button>
       </div>
     );
   }
 
   if (status === TimerStatus.Pause) {
     return (
-      <div className="flex justify-around">
-        <button className="timer__btn" onClick={continueHandler}>
+      <div className="flex items-center justify-around gap-3">
+        <Button onClick={continueHandler} theme="white">
           Возобновить
-        </button>
-        <button className="timer__btn" onClick={stopHandler}>
+        </Button>
+        <Button onClick={stopHandler} theme="white">
           Закончить
-        </button>
+        </Button>
       </div>
     );
   }
 
   if (status === TimerStatus.Break) {
     return (
-      <div className="flex justify-around">
-        <button className="timer__btn" onClick={startBreak}>
+      <div className="flex items-center justify-around gap-3">
+        <Button onClick={startBreak} theme="white">
           Начать
-        </button>
-        <button className="timer__btn" onClick={stopHandler}>
+        </Button>
+        <Button onClick={stopHandler} theme="white">
           Пропустить
-        </button>
+        </Button>
       </div>
     );
   }
 
   if (status === TimerStatus.Idle) {
     return (
-      <div className="flex justify-around">
-        <button className="timer__btn" onClick={startHadnler}>
+      <div className="flex items-center justify-around gap-3">
+        <Button onClick={startHadnler} theme="white">
           Начать
-        </button>
+        </Button>
       </div>
     );
   }
-
-  return (
-    <div className="flex justify-around">
-      <button className="timer__btn" onClick={startHadnler}>
-        Начать
-      </button>
-      {/* <button className="timer__btn" onClick={pauseHandler}>
-        Пауза
-      </button> */}
-    </div>
-  );
 };
 
 export default Timer;

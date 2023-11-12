@@ -87,7 +87,7 @@ const NavItem: FC<INavItem> = ({ href, iconPath, title }) => (
   <NavLink
     className={({ isActive }) =>
       isActive
-        ? "aside__nav-link flex items-center gap-2 rounded aside__nav-link--active"
+        ? "aside__nav-link flex items-center gap-2 rounded-lgaside__nav-link--active"
         : "aside__nav-link flex items-center gap-2 rounded"
     }
     to={href}

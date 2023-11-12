@@ -55,11 +55,11 @@ const AddTodoPopup: FC<Props> = ({ isOpen, closeHandler, createTodo }) => {
         <div className="flex gap-4">
           <div className="flex flex-col gap-3">
             <input
-              className="border border-grayBorder py-1 px-2 rounded w-80 max-w-xs"
+              className="border border-grayBorder py-1 px-2 rounded-lgw-80 max-w-xs"
               placeholder="Название"
             />
             <textarea
-              className="border border-grayBorder py-1 px-2 rounded h-60 w-80 resize-none"
+              className="border border-grayBorder py-1 px-2 rounded-lgh-60 w-80 resize-none"
               placeholder="Описание"
             />
           </div>
@@ -93,7 +93,7 @@ const AddTodoPopup: FC<Props> = ({ isOpen, closeHandler, createTodo }) => {
             <label className="flex flex-col gap-2 text-sm">
               Помидоры:
               <input
-                className="border border-grayBorder py-1 px-2 rounded w-16"
+                className="border border-grayBorder py-1 px-2 rounded-lgw-16"
                 type="number"
                 {...register("pomidors")}
               />
@@ -101,7 +101,7 @@ const AddTodoPopup: FC<Props> = ({ isOpen, closeHandler, createTodo }) => {
             <label className="flex flex-col gap-2 text-sm">
               Срок выполнения:
               <input
-                className="border border-grayBorder py-1 px-2 rounded cursor-pointer"
+                className="border border-grayBorder py-1 px-2 rounded-lgcursor-pointer"
                 type="date"
                 {...register("deadline")}
               />
@@ -110,14 +110,14 @@ const AddTodoPopup: FC<Props> = ({ isOpen, closeHandler, createTodo }) => {
         </div>
         <div className="flex justify-end items-center gap-3">
           <button
-            className="rounded border-none w-24 h-9 text-white bg-black"
+            className="rounded-lgborder-none w-24 h-9 text-white bg-black"
             onClick={closeHandler}
           >
             Отмена
           </button>
           <button
             type="submit"
-            className="rounded border-none w-24 h-9 text-white bg-red"
+            className="rounded-lgborder-none w-24 h-9 text-white bg-red"
           >
             Создать
           </button>
