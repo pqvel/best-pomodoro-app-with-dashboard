@@ -10,8 +10,9 @@ import {
 import Icons from "../../../assets/img/icons.svg";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import AddTodo from "../addTodo/AddTodo";
-import AddTodoPopup from "../../popups/todoPopup/AddTodoPopup";
+import TodoPopup from "../../popups/todoPopup/todoPopup";
 import { usePopup } from "../../../core/hooks/usePopup";
+import CreateTodo from "../../CreateTodo";
 
 type SectionProps = {
   section: SectionType;
@@ -68,13 +69,13 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         ))}
         <AddTodo addHandler={addTodoPopup.togglePopup} />
       </div>
-
       {addTodoPopup.isOpen && (
-        <AddTodoPopup
-          isOpen={addTodoPopup.isOpen}
-          closeHandler={toggleAddTodoPopupHandler}
+        <TodoPopup
+        // isOpen={addTodoPopup.isOpen}
+        // closeHandler={toggleAddTodoPopupHandler}
         />
       )}
+      <CreateTodo />
     </>
   );
 };

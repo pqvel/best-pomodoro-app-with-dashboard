@@ -7,15 +7,23 @@ const buttonStyles = {
 
 type ButtonProps = {
   children: ReactNode | ReactElement;
+  disabled?: boolean;
   theme?: "black" | "white";
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: FC<ButtonProps> = ({ children, theme = "black", onClick }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  theme = "black",
+  onClick,
+  disabled,
+}) => {
   return (
     <button
-      className={`rounded px-3 py-2 ${buttonStyles[theme]}`}
+      className={`rounded px-3 py-1 ${buttonStyles[theme]}`}
       onClick={onClick}
+      disabled={disabled}
+      type="button"
     >
       {children}
     </button>
