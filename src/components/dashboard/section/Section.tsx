@@ -10,7 +10,7 @@ import {
 import Icons from "../../../assets/img/icons.svg";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import AddTodo from "../addTodo/AddTodo";
-import TodoPopup from "../../popups/todoPopup/todoPopup";
+import TodoPopup from "../../popups/todoPopup";
 import { usePopup } from "../../../core/hooks/usePopup";
 import CreateTodo from "../../CreateTodo";
 
