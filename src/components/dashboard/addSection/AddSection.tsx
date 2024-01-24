@@ -42,6 +42,7 @@ const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
         <button
           className="button button-black"
           onKeyDown={enterHandler}
+          onClick={addSectionHandler}
           disabled={isDisabledBtn}
         >
           Добавить раздел
