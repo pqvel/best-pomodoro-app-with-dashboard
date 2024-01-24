@@ -14,7 +14,7 @@ const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
   const enterHandler = (
     e: KeyboardEvent<HTMLInputElement | HTMLButtonElement>
   ) => {
-    if (e.key === "Enter") addSectionHandler();
+    e.key === "Enter" && addSectionHandler();
   };
 
   const addSectionHandler = () => {

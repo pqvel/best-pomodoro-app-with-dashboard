@@ -1,3 +1,10 @@
+/**
+ * Popup component that renders a modal popup overlay.
+ *
+ * Accepts children content to display in the popup, a closePopup
+ * callback to close the popup, and a PopupType to control the max
+ * width.
+ */
 import { FC } from "react";
 
 export const enum PopupType {
@@ -6,6 +13,13 @@ export const enum PopupType {
   small = "max-w-sm",
 }
 
+/**
+ * Props interface for the Popup component.
+ *
+ * @param children - The content to render inside the popup. Can be a string, JSX element, or array of JSX elements.
+ * @param closePopup - Optional callback function to close the popup.
+ * @param type - Optional popup type to control the max width. Defaults to PopupType.medium.
+ */
 type Props = {
   children: string | JSX.Element | JSX.Element[];
   closePopup?: () => void;
