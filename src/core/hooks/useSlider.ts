@@ -17,8 +17,8 @@ export const useSlider = ({
   activeSlide?: number;
   gap?: number;
 }): UseSliderReturnType => {
-  const slider = useRef<HTMLDivElement | null>(null);
-  const sliderWrapper = useRef<HTMLDivElement | null>(null);
+  const slider = useRef<HTMLElement>();
+  const sliderWrapper = useRef<HTMLElement>();
 
   const [currentSlide, setCurrentSlide] = useState<number>(activeSlide);
   const [countSlides, setCountSlides] = useState<number>(0);

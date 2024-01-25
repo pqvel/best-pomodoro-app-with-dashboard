@@ -1,18 +1,17 @@
 import { FC, MouseEvent } from "react";
 import SwitchTextInput from "../../switchTextInput/SwitchTextInput";
 import Todo from "../todo/Todo";
+import Icons from "../../../assets/img/icons.svg";
+import AddTodo from "../addTodo/AddTodo";
+import CreateTodo from "../../CreateTodo";
+import { useAppDispatch } from "../../../core/redux/app/hooks";
 import {
   SectionType,
   addTodo,
   changeSectionTitle,
   deleteSection,
 } from "../../../core/redux/slices/dashboardSlice";
-import Icons from "../../../assets/img/icons.svg";
-import { useAppDispatch } from "../../../core/redux/app/hooks";
-import AddTodo from "../addTodo/AddTodo";
-import TodoPopup from "../../popups/todoPopup";
-import { usePopup } from "../../../core/hooks/usePopup";
-import CreateTodo from "../../CreateTodo";
+import { setIsOpenTodoPopup } from "../../../core/redux/slices/popupSlice";
 
 type SectionProps = {
   section: SectionType;
@@ -21,12 +20,6 @@ type SectionProps = {
 
 const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   const dispatch = useAppDispatch();
-  const addTodoPopup = usePopup();
-
-  const toggleAddTodoPopupHandler = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    addTodoPopup.togglePopup();
-  };
 
   return (
     <>
@@ -67,14 +60,9 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         {section.todos.map((todo) => (
           <Todo todo={todo} key={todo.id} />
         ))}
-        <AddTodo addHandler={addTodoPopup.togglePopup} />
+        <AddTodo addHandler={() => dispatch(setIsOpenTodoPopup(true))} />
       </div>
-      {addTodoPopup.isOpen && (
-        <TodoPopup
-        // isOpen={addTodoPopup.isOpen}
-        // closeHandler={toggleAddTodoPopupHandler}
-        />
-      )}
+
       <CreateTodo />
     </>
   );
