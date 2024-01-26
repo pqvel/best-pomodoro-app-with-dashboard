@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type PopupState = {
   isOpenTodoPopup: boolean;
+  todoPopupSectionId: string;
 };
 
 const initialState: PopupState = {
   isOpenTodoPopup: false,
+  todoPopupSectionId: "",
 };
 
 export const popupSlice = createSlice({
@@ -15,8 +17,11 @@ export const popupSlice = createSlice({
     setIsOpenTodoPopup: (state, action: PayloadAction<boolean>) => {
       state.isOpenTodoPopup = action.payload;
     },
+    setTodoPopupSectionId: (state, action: PayloadAction<string>) => {
+      state.todoPopupSectionId = action.payload;
+    },
   },
 });
 
-export const { setIsOpenTodoPopup } = popupSlice.actions;
+export const { setIsOpenTodoPopup, setTodoPopupSectionId } = popupSlice.actions;
 export default popupSlice.reducer;
