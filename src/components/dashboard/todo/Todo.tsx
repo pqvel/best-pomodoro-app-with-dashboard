@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TodoType } from "../../../core/redux/slices/dashboardSlice";
+import { TodoType } from "../../../core/models/TodoModel";
 
 type TodoProps = {
 	todo: TodoType;
