@@ -1,10 +1,12 @@
-import { FC } from "react";
-import Icons from "../../assets/img/icons.svg";
+import { ChangeEvent, FC, LegacyRef, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { setTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
 import { useForm } from "react-hook-form";
 import { createTodo } from "../../core/redux/slices/dashboardSlice";
+import { setScrollHeight } from "../../core/utils/setScrollHeight";
+import Svg from "../ui/Svg";
 
+// тултип это подсказка, нужно поменять названия
 type AddTodoProps = {
   dashboardId: string;
   sectionId: string;
@@ -23,7 +25,9 @@ const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
 
   if (sectionId !== todoPopupSectionId) {
     return (
-      <AddTodoButton openTodoForm={() => setTodoPopupSectionId(sectionId)} />
+      <AddTodoButton
+        openTodoForm={() => dispatch(setTodoPopupSectionId(sectionId))}
+      />
     );
   }
 
@@ -36,10 +40,24 @@ type AddTodoFormProps = {
 
 const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
   return (
-    <form onSubmit={handleCreateTodo}>
-      <input />
-      <textarea />
-      <div>{/* <button>Создать</button> */}</div>
+    <form
+      className=" bg-white rounded-lg border border-gray-300 p-3"
+      onSubmit={handleCreateTodo}
+    >
+      <input
+        className="p-0 w-full font-semibold outline-none mb-1"
+        placeholder="Заголовок"
+      />
+      <textarea
+        className="p-0 w-full text-sm outline-none max-h-40 resize-none"
+        placeholder="Описание"
+        onChange={setScrollHeight}
+      />
+      <div className="flex">
+        <button className=" flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-gray-500 w-6 h-6 m-0 p-0">
+          <Svg width={16} height={16} iconId="icon-star" />
+        </button>
+      </div>
     </form>
   );
 };
@@ -50,11 +68,9 @@ type AddTodoButtonProps = {
 
 const AddTodoButton: FC<AddTodoButtonProps> = ({ openTodoForm }) => (
   <button className="flex items-center gap-3" onClick={openTodoForm}>
-    <svg width={20} height={20}>
-      <use href={`${Icons}#icon-plus`}></use>
-    </svg>
+    <Svg width={20} height={20} iconId="icon-plus" />
     Добавить задачу
   </button>
 );
 
-export default AddTodoButton;
+export default AddTodo;

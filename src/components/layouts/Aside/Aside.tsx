@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Icons from "../../../assets/img/icons.svg";
+
 import "./aside.scss";
 import { useResizeElement } from "../../../core/hooks/useResizeElement";
-
+import Svg from "../../ui/Svg";
 /**
  * @todo
  * - разделить на страницы только main
@@ -18,22 +18,22 @@ interface INavItem {
 const navItems: INavItem[] = [
   {
     href: "/",
-    iconPath: `${Icons}#icon-timer`,
+    iconPath: `icon-timer`,
     title: "Timer",
   },
   {
     href: "/todos",
-    iconPath: `${Icons}#icon-list`,
+    iconPath: `icon-list`,
     title: "Todos",
   },
   {
     href: "/stats",
-    iconPath: `${Icons}#icon-stats`,
+    iconPath: `icon-stats`,
     title: "Stats",
   },
   {
     href: "/info",
-    iconPath: `${Icons}#icon-book`,
+    iconPath: `icon-book`,
     title: "Техника Pomodoro",
   },
 ];
@@ -92,9 +92,7 @@ const NavItem: FC<INavItem> = ({ href, iconPath, title }) => (
     }
     to={href}
   >
-    <svg className="text-red min-w-[30px] max-h-[30px]" width={30} height={30}>
-      <use href={iconPath}></use>
-    </svg>
+    <Svg className="text-red" width={30} height={30} iconId={iconPath} />
     <span className="truncate">{title}</span>
   </NavLink>
 );

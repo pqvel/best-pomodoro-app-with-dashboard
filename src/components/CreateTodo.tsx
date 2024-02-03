@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import Icons from "../assets/img/icons.svg";
+import Svg from "./ui/Svg";
 
 const CreateTodo: FC = () => {
   const [value, setValue] = useState("");
@@ -22,21 +22,22 @@ const CreateTodo: FC = () => {
 export default CreateTodo;
 
 const Counter: FC = ({}) => (
-  <div className=" flex flex-col gap-1 items-center">
+  <div className="flex flex-col gap-1 items-center">
     <div className="flex items-center gap-2">
-      <button className=" rounded text-black bg-gray border-grayBorder flex items-center justify-center w-6 h-6">
-        <svg width={16} height={16}>
-          <use href={`${Icons}#icon-minus`}></use>
-        </svg>
+      <button>
+        <Svg
+          className="rounded text-black bg-gray border-grayBorder flex items-center justify-center w-6 h-6"
+          width={16}
+          height={16}
+          iconId="icon-minus"
+        />
       </button>
       <input
         className="flex items-center justify-center text-center w-8 h-6 bg-white rounded"
         type="number"
       />
       <button className="rounded text-black bg-gray border-grayBorder flex items-center justify-center w-6 h-6">
-        <svg width={16} height={16}>
-          <use href={`${Icons}#icon-plus`}></use>
-        </svg>
+        <Svg width={16} height={16} iconId="icon-plus" />
       </button>
     </div>
     <p className=" text-grayText text-xs">25 минут</p>
