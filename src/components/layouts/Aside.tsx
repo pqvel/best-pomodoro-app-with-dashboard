@@ -1,9 +1,7 @@
 import { FC, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-
-import "./aside.scss";
-import { useResizeElement } from "../../../core/hooks/useResizeElement";
-import Svg from "../../ui/Svg";
+import { useResizeElement } from "../../core/hooks/useResizeElement";
+import Svg from "../ui/Svg";
 /**
  * @todo
  * - разделить на страницы только main
@@ -53,9 +51,9 @@ const Aside: FC = () => {
   return (
     <aside
       ref={resizeElement}
-      className="aside relative p-5 flex flex-col h-full max-w-[320px] min-w-[94px]"
+      className=" bg-slate-950 w-80 relative p-5 flex flex-col h-full max-w-[320px] min-w-[94px]"
     >
-      <nav className="aside__nav flex flex-col gap-4">
+      <nav className="flex flex-col gap-4">
         <ul className="flex flex-col gap-4">
           {navItems.map(({ href, iconPath, title }) => (
             <li key={title}>
@@ -87,8 +85,8 @@ const NavItem: FC<INavItem> = ({ href, iconPath, title }) => (
   <NavLink
     className={({ isActive }) =>
       isActive
-        ? "aside__nav-link flex items-center gap-2 rounded-lgaside__nav-link--active"
-        : "aside__nav-link flex items-center gap-2 rounded"
+        ? "flex py-2 px-3 items-center gap-2 rounded transition font-semibold text-red-600 bg-white "
+        : "flex py-2 px-3 items-center gap-2 rounded transition font-semibold hover:bg-slate-200 hover:text-black text-white"
     }
     to={href}
   >

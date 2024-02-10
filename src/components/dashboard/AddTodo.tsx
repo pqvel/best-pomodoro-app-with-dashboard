@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { createTodo } from "../../core/redux/slices/dashboardSlice";
 import { setScrollHeight } from "../../core/utils/setScrollHeight";
 import Svg from "../ui/Svg";
+import Hashtags from "../todoSettings/Hashtags";
 
 // тултип это подсказка, нужно поменять названия
 type AddTodoProps = {
@@ -12,6 +13,9 @@ type AddTodoProps = {
   sectionId: string;
 };
 
+// const enum SettingsComponents {
+//   tag =
+// }
 const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
   const dispatch = useAppDispatch();
 
@@ -54,9 +58,11 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
         onChange={setScrollHeight}
       />
       <div className="flex">
-        <button className=" flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-gray-500 w-6 h-6 m-0 p-0">
+        <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-6 h-6 m-0 p-0 mr-2">
           <Svg width={16} height={16} iconId="icon-star" />
         </button>
+
+        <Hashtags setHashtags={() => {}} hashtags={[]} isActive={true} />
       </div>
     </form>
   );
