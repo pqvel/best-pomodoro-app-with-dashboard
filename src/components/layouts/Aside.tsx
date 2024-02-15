@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useResizeElement } from "../../core/hooks/useResizeElement";
-import Svg from "../ui/Svg";
+import { useResizeElement } from "@/core/hooks/useResizeElement";
+import { Svg } from "@/components/UI";
 /**
  * @todo
  * - разделить на страницы только main

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import MainTemplate from "../templates/MainTemplate";
-import Timer from "../timer/Timer";
-import TimerTodo from "../timer/TimerTodo";
 import { Link } from "react-router-dom";
+import MainTemplate from "@/components/templates/MainTemplate";
+import Timer from "@/components/timer/Timer";
+import TimerTodo from "@/components/timer/TimerTodo";
 
 const TimerPage: FC = () => (
   <MainTemplate>

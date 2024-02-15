@@ -1,5 +1,6 @@
 import { FC, useRef, ChangeEvent } from "react";
-import Svg from "../ui/Svg";
+import { Svg } from "@/components/UI";
+
 type HashtagsProps = {
   hashtags: string[];
   setHashtags: (hashtags: string[]) => void;
@@ -25,7 +26,7 @@ const Hashtags: FC<HashtagsProps> = ({ hashtags, isActive, setHashtags }) => {
         <Svg width={16} height={16} iconId="icon-tag" />
       </button>
       {isActive && (
-        <div className=" absolute top-full left-1/2 -translate-x-1/2">
+        <div className="absolute top-full left-0 bg-white p-2">
           <ul>
             {hashtags.map((hashtag) => (
               <li className=" flex bg-slate-950 rounded-2xl">

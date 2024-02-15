@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Aside from "../layouts/Aside";
-import Header from "../layouts/Header";
+import Aside from "@/components/layouts/Aside";
+import Header from "@/components/layouts/Header";
 
 type Props = {
   children: string | JSX.Element | JSX.Element[];

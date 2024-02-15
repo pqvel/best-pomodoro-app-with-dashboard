@@ -1,66 +1,66 @@
 import { FC, useEffect, useRef, useState } from "react";
 
 type Props = {
-	children: string | JSX.Element | JSX.Element[];
-	editTextClass: string;
-	value: string;
-	editHandler: (value: string) => void;
+  children: string | JSX.Element | JSX.Element[];
+  editTextClass: string;
+  value: string;
+  editHandler: (value: string) => void;
 };
 // нужно хранить пред состояние текста
 const SwitchTextInput: FC<Props> = ({
-	children,
-	editTextClass,
-	value,
-	editHandler,
+  children,
+  editTextClass,
+  value,
+  editHandler,
 }) => {
-	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const editInput = useRef<HTMLInputElement>(null);
-	const editButton = useRef<HTMLButtonElement>(null);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const editInput = useRef<HTMLInputElement>(null);
+  const editButton = useRef<HTMLButtonElement>(null);
 
-	const changeHandler = () => {
-		editButton.current!.disabled = editInput.current!.value === "";
-	};
+  const changeHandler = () => {
+    editButton.current!.disabled = editInput.current!.value === "";
+  };
 
-	const toggleEditText = () => {
-		setIsEdit((isEdit) => !isEdit);
-	};
+  const toggleEditText = () => {
+    setIsEdit((isEdit) => !isEdit);
+  };
 
-	const confirmChanges = () => {
-		const value = editInput.current!.value;
-		editHandler(value);
-		toggleEditText();
-	};
+  const confirmChanges = () => {
+    const value = editInput.current!.value;
+    editHandler(value);
+    toggleEditText();
+  };
 
-	useEffect(() => {
-		if (isEdit) editInput.current?.focus();
-	}, [isEdit]);
+  useEffect(() => {
+    if (isEdit) editInput.current?.focus();
+  }, [isEdit]);
 
-	if (isEdit) {
-		return (
-			<div>
-				<input
-					ref={editInput}
-					className={editTextClass + " mb-2"}
-					onChange={changeHandler}
-					defaultValue={value}
-				/>
-				<div className="flex gap-2">
-					<button
-						ref={editButton}
-						className="button button-black"
-						onClick={confirmChanges}
-					>
-						Сохранить
-					</button>
-					<button className="button button-gray" onClick={toggleEditText}>
-						Отмена
-					</button>
-				</div>
-			</div>
-		);
-	}
+  if (isEdit) {
+    return (
+      <div>
+        <input
+          ref={editInput}
+          className={editTextClass + " mb-2"}
+          onChange={changeHandler}
+          defaultValue={value}
+        />
+        <div className="flex gap-2">
+          <button
+            ref={editButton}
+            className="button button-black"
+            onClick={confirmChanges}
+          >
+            Сохранить
+          </button>
+          <button className="button button-gray" onClick={toggleEditText}>
+            Отмена
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-	return <div onClick={toggleEditText}>{children}</div>;
+  return <div onClick={toggleEditText}>{children}</div>;
 };
 
 export default SwitchTextInput;
