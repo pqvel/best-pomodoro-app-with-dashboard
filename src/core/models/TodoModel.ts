@@ -1,32 +1,29 @@
 import { v4 as uuid } from "uuid";
 
-type TodoConstructorType = {
-  title: string;
-  descr: string;
-  priority: number;
-  countPomodors: number;
-  deadline: number;
-  hashtags: string[];
-};
-
-export type TodoType = {
+export interface ITodo {
   readonly id: string;
   readonly leftTime: number;
   title: string;
   descr?: string;
   priority?: number;
-  countPomodors?: number;
   deadline?: number;
   hashtags?: string[];
+}
+
+type TodoModelConstructor = {
+  title: string;
+  descr?: string;
+  priority: number;
+  deadline: number;
+  hashtags: string[];
 };
 
-export class TodoModel {
+export class TodoModel implements ITodo {
   readonly id: string = uuid();
   readonly leftTime: number = 0;
   title: string;
   descr?: string;
   priority?: number;
-  countPomodors?: number;
   deadline?: number;
   hashtags?: string[];
 
@@ -34,14 +31,12 @@ export class TodoModel {
     title,
     descr = "",
     priority = 0,
-    countPomodors = 1,
     deadline = 0,
     hashtags = [],
-  }: TodoConstructorType) {
+  }: TodoModelConstructor) {
     this.title = title;
     this.descr = descr;
     this.priority = priority;
-    this.countPomodors = countPomodors;
     this.deadline = deadline;
     this.hashtags = hashtags;
   }

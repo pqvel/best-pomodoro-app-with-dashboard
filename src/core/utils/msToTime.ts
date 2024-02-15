@@ -1,4 +1,11 @@
-export const msToTime = (ms: number) => {
+type MsToTimeReturn = {
+  seconds: string;
+  minutes: string;
+  hours: string;
+  days: string;
+};
+
+export const msToTime = (ms: number): MsToTimeReturn => {
   const seconds: number = Math.floor(ms / 1000);
   const minutes: number = Math.floor(seconds / 60);
   const hours: number = Math.floor(minutes / 60);
