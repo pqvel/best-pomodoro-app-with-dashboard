@@ -1,5 +1,5 @@
 import { FC } from "react";
-import MainTemplate from "@/components/templates/MainTemplate";
+import MainTemplate from "../templates/MainTemplate";
 
 const StatsPage: FC = () => (
   <MainTemplate>

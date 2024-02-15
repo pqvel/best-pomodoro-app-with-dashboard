@@ -1,11 +1,11 @@
 import { ChangeEvent, FC, LegacyRef, useRef } from "react";
+import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
+import { setTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "@/core/redux/app/hooks";
-import { setTodoPopupSectionId } from "@/core/redux/slices/popupSlice";
-import { createTodo } from "@/core/redux/slices/dashboardSlice";
-import { setScrollHeight } from "@/core/utils/setScrollHeight";
-import { Svg } from "@/components/UI";
-import Hashtags from "@/components/todoSettings/Hashtags";
+import { createTodo } from "../../core/redux/slices/dashboardSlice";
+import { setScrollHeight } from "../../core/utils/setScrollHeight";
+import Svg from "../ui/Svg";
+import Hashtags from "../todoSettings/Hashtags";
 
 // тултип это подсказка, нужно поменять названия
 type AddTodoProps = {

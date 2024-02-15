@@ -1,10 +1,10 @@
 import { FC } from "react";
-import SwitchTextInput from "@/components/switchTextInput/SwitchTextInput";
-import Section from "@/components/dashboard/section/Section";
-import Tooltip from "@/components/tooltip/Tooltip";
-import AddSection from "@/components/dashboard/addSection/AddSection";
-import { useAppDispatch, useAppSelector } from "@/core/redux/app/hooks";
-import { changeDashboardTitle } from "@/core/redux/slices/dashboardSlice";
+import SwitchTextInput from "../switchTextInput/SwitchTextInput";
+import Section from "./section/Section";
+import Tooltip from "../tooltip/Tooltip";
+import AddSection from "./addSection/AddSection";
+import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
+import { changeDashboardTitle } from "../../core/redux/slices/dashboardSlice";
 import "./dashboard.scss";
 
 const Dashboard: FC = () => {

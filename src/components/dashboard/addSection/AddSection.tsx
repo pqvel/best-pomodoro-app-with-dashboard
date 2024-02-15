@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, FC, useRef, useState } from "react";
-import { useAppDispatch } from "@/core/redux/app/hooks";
-import { addSection } from "@/core/redux/slices/dashboardSlice";
+import { useAppDispatch } from "../../../core/redux/app/hooks";
+import { addSection } from "../../../core/redux/slices/dashboardSlice";
 
 const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
   const dispatch = useAppDispatch();

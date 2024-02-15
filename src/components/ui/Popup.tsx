@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
-import { Svg } from "@/components/UI";
+import Svg from "./Svg";
 
 export const enum PopupType {
   large = "max-w-5xl ",
@@ -14,7 +14,7 @@ type Props = {
   type?: PopupType;
 };
 
-export const Popup: FC<Props> = ({
+const Popup: FC<Props> = ({
   isOpen,
   children,
   closePopup,
@@ -45,3 +45,5 @@ export const Popup: FC<Props> = ({
     document.getElementById("root") as HTMLElement
   );
 };
+
+export default Popup;

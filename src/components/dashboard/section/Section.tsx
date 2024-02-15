@@ -1,16 +1,16 @@
 import { FC } from "react";
-import SwitchTextInput from "@/components/switchTextInput/SwitchTextInput";
-import Todo from "@/components/dashboard/todo/Todo";
-import AddTodo from "@/components/dashboard/AddTodo";
-import { Svg } from "@/components/UI";
-import { useAppDispatch } from "@/core/redux/app/hooks";
+import SwitchTextInput from "../../switchTextInput/SwitchTextInput";
+import Todo from "../todo/Todo";
+import AddTodo from "../AddTodo";
+import Svg from "../../ui/Svg";
+import { useAppDispatch } from "../../../core/redux/app/hooks";
 import {
   SectionType,
   createTodo,
   changeSectionTitle,
   deleteSection,
-} from "@/core/redux/slices/dashboardSlice";
-import { setIsOpenTodoPopup } from "@/core/redux/slices/popupSlice";
+} from "../../../core/redux/slices/dashboardSlice";
+import { setIsOpenTodoPopup } from "../../../core/redux/slices/popupSlice";
 
 type SectionProps = {
   section: SectionType;

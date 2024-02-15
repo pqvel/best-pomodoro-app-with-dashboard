@@ -11,6 +11,6 @@ export const TextInput: FC<Props> = ({ placeholder }) => (
   />
 );
 
-export const Textarea: FC = () => {
-  return <textarea></textarea>;
+export const Textarea = () => {
+  return <Textarea></Textarea>;
 };
