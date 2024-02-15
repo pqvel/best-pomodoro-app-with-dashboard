@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Settings } from "../../core/redux/slices/userSettingsSlice";
 import { useAppSelector } from "../../core/redux/app/hooks";
-import { useTimer } from "../../core/hooks/useTImer";
+import { useTimer } from "../../core/hooks/useTimer";
 import { msToTime } from "../../core/utils/msToTime";
 import Button from "../ui/Button";
 

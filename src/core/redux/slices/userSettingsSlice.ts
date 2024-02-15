@@ -12,7 +12,7 @@ export interface Settings {
 const initialState: Settings = {
   countPomodors: 4,
   currentPomodoro: 1,
-  pomodoroTime: 10,
+  pomodoroTime: 10_000,
   breakTime: 300,
   bigBreakTime: 1200,
 };

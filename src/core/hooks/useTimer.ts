@@ -12,7 +12,7 @@ type useTimerReturn = {
 };
 
 export const useTimer = ({ timerTime }: useTimerParams): useTimerReturn => {
-  const [leftTime, setLeftTime] = useState<number>(0);
+  const [leftTime, setLeftTime] = useState<number>(timerTime);
   let timerId: ReturnType<typeof setInterval>;
   let currTime: number = 0;
   let prevTime: number = 0;
