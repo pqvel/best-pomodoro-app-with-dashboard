@@ -13,19 +13,19 @@ export interface ITodo {
 type TodoModelConstructor = {
   title: string;
   descr?: string;
-  priority: number;
-  deadline: number;
-  hashtags: string[];
+  priority?: number;
+  deadline?: number;
+  hashtags?: string[];
 };
 
 export class TodoModel implements ITodo {
   readonly id: string = uuid();
   readonly leftTime: number = 0;
   title: string;
-  descr?: string;
-  priority?: number;
-  deadline?: number;
-  hashtags?: string[];
+  descr: string;
+  priority: number;
+  deadline: number;
+  hashtags: string[];
 
   constructor({
     title,
