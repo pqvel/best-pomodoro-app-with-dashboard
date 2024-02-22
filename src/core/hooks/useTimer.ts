@@ -11,34 +11,48 @@ type useTimerReturn = {
   stopTimer: () => void;
 };
 
+/**
+ * в useTimer можно вернуть хук который будет устанавливать timerTime
+ */
+
 export const useTimer = ({ timerTime }: useTimerParams): useTimerReturn => {
   const [leftTime, setLeftTime] = useState<number>(timerTime);
-  let timerId: ReturnType<typeof setInterval>;
+  const [timerId, setTimerId] = useState<ReturnType<typeof setInterval> | null>(
+    null
+  );
   let currTime: number = 0;
   let prevTime: number = 0;
   let pastTime: number = 0;
 
   const playTimer = () => {
     prevTime = Date.now();
+    setTimerId(
+      setInterval(() => {
+        currTime = Date.now();
+        pastTime += currTime - prevTime;
 
-    timerId = setInterval(() => {
-      currTime = Date.now();
-      pastTime += currTime - prevTime;
+        const newLeftTime = Math.ceil((timerTime - pastTime) / 1000) * 1000;
+        newLeftTime < 0 ? setLeftTime(0) : setLeftTime(newLeftTime);
 
-      setLeftTime(() => timerTime - pastTime);
-
-      prevTime = Date.now();
-    }, 1000);
+        prevTime = Date.now();
+      }, 500)
+    );
   };
 
   const pauseTimer = () => {
+    if (!timerId) return;
     clearInterval(timerId);
+    setTimerId(null);
   };
 
   const stopTimer = () => {
-    clearInterval(timerId);
+    if (timerId) {
+      clearInterval(timerId);
+      setTimerId(null);
+    }
+
     pastTime = 0;
-    setLeftTime(0);
+    setLeftTime(timerTime);
   };
 
   return {

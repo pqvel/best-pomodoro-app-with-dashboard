@@ -5,27 +5,44 @@ import { useTimer } from "../../core/hooks/useTimer";
 import { msToTime } from "../../core/utils/msToTime";
 import Button from "../ui/Button";
 
-enum TimerStatus {
-  Break = "BREAK",
+const enum TimerStatus {
   Timer = "TIMER",
   Pause = "PAUSE",
   Idle = "IDLE",
 }
 
+const enum PomodoroStatus {
+  Work = "Work",
+  Break = "BREAK",
+  BigBreak = "BIG_BREAKE",
+}
+
 const Timer: FC = () => {
   const settings = useAppSelector((state) => state.settings);
-  const [status, setStatus] = useState<TimerStatus>(TimerStatus.Idle);
+  const [timerStatus, setTimerStatus] = useState<TimerStatus>(TimerStatus.Idle);
+  const [pomodoroStatus, setPomodoroStatus] = useState<PomodoroStatus>(
+    PomodoroStatus.Work
+  );
+
+  const timerTime =
+    pomodoroStatus === PomodoroStatus.Work
+      ? settings.pomodoroTime
+      : settings.breakTime;
 
   const { leftTime, playTimer, pauseTimer, stopTimer } = useTimer({
-    timerTime: settings.pomodoroTime,
+    timerTime: timerTime,
   });
 
   useEffect(() => {
-    if (leftTime <= 0) setStatus(TimerStatus.Idle);
+    if (leftTime === 0) {
+      setTimerStatus(TimerStatus.Idle);
+      setPomodoroStatus(PomodoroStatus.Break);
+      stopTimer();
+    }
   }, [leftTime]);
 
   const handleTimer = () => {
-    setStatus(TimerStatus.Timer);
+    setTimerStatus(TimerStatus.Timer);
     playTimer();
   };
 
@@ -34,7 +51,13 @@ const Timer: FC = () => {
   };
 
   const handlePause = () => {
+    setTimerStatus(TimerStatus.Pause);
     pauseTimer();
+  };
+
+  const handleContinue = () => {
+    setTimerStatus(TimerStatus.Timer);
+    playTimer();
   };
 
   const handleStop = () => {
@@ -42,17 +65,17 @@ const Timer: FC = () => {
   };
 
   const bgColorClass =
-    status === TimerStatus.Break ? "bg-green-700" : "bg-red-700";
+    pomodoroStatus === PomodoroStatus.Work ? "bg-red-700" : "bg-green-700";
   return (
     <div
       className={`flex flex-col gap-5 items-center justify-center rounded-lg p-5 shadow-md shadow-gray ${bgColorClass}`}
     >
       <TimerDisplay time={leftTime} settings={settings} />
       <TimerButtons
-        status={status}
+        status={timerStatus}
         startHadnler={handleTimer}
         pauseHandler={handlePause}
-        continueHandler={playTimer}
+        continueHandler={handleContinue}
         stopHandler={handleStop}
         startBreak={handleBreak}
       />
@@ -121,18 +144,18 @@ const TimerButtons: FC<TimerButtonsProps> = ({
     );
   }
 
-  if (status === TimerStatus.Break) {
-    return (
-      <div className="flex items-center justify-around gap-3">
-        <Button onClick={startBreak} theme="white">
-          Начать
-        </Button>
-        <Button onClick={stopHandler} theme="black">
-          Пропустить
-        </Button>
-      </div>
-    );
-  }
+  // if (status === TimerStatus.Break) {
+  //   return (
+  //     <div className="flex items-center justify-around gap-3">
+  //       <Button onClick={startBreak} theme="white">
+  //         Начать
+  //       </Button>
+  //       <Button onClick={stopHandler} theme="black">
+  //         Пропустить
+  //       </Button>
+  //     </div>
+  //   );
+  // }
 
   if (status === TimerStatus.Idle) {
     return (
