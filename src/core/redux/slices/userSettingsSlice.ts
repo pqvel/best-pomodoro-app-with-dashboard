@@ -12,24 +12,17 @@ export interface Settings {
 const initialState: Settings = {
   countPomodors: 4,
   currentPomodoro: 1,
-  pomodoroTime: 10_000, // 25 * 60 * 1000
-  breakTime: 20_000, // 5 * 60 * 1000
-  bigBreakTime: 30_000, // 20 * 60 * 1000
+  pomodoroTime: 5_000, // 25 * 60 * 1000
+  breakTime: 10_000, // 5 * 60 * 1000
+  bigBreakTime: 20_000, // 20 * 60 * 1000
 };
 
 export const userSettingsSlice = createSlice({
   name: "userSettings",
   initialState,
   reducers: {
-    setNextPomodoro: (state) => {
-      if (state.currentPomodoro === state.countPomodors) {
-        state.currentPomodoro = 1;
-      } else {
-        state.currentPomodoro += 1;
-      }
-    },
-    updateCountPomodoros: (state, action: PayloadAction<number>) => {
-      state.countPomodors = action.payload;
+    setNextPomodoro: (state, action: PayloadAction<number>) => {
+      state.currentPomodoro = action.payload;
     },
   },
 });

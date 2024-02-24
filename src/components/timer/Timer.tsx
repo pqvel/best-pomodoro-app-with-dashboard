@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import { Settings } from "../../core/redux/slices/userSettingsSlice";
-import { useAppSelector } from "../../core/redux/app/hooks";
+import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { useTimer } from "../../core/hooks/useTimer";
 import { msToTime } from "../../core/utils/msToTime";
+import { setNextPomodoro } from "../../core/redux/slices/userSettingsSlice";
 import Button from "../ui/Button";
 
 const enum TimerStatus {
@@ -18,26 +19,41 @@ const enum PomodoroStatus {
 }
 
 const Timer: FC = () => {
+  const dispatch = useAppDispatch();
   const settings = useAppSelector((state) => state.settings);
   const [timerStatus, setTimerStatus] = useState<TimerStatus>(TimerStatus.Idle);
   const [pomodoroStatus, setPomodoroStatus] = useState<PomodoroStatus>(
     PomodoroStatus.Work
   );
 
-  const timerTime =
-    pomodoroStatus === PomodoroStatus.Work
-      ? settings.pomodoroTime
-      : settings.breakTime;
-
-  const { leftTime, playTimer, pauseTimer, stopTimer } = useTimer({
-    timerTime: timerTime,
-  });
+  const { leftTime, playTimer, pauseTimer, stopTimer, changeTimerTime } =
+    useTimer({
+      initialTimerTime: settings.pomodoroTime,
+    });
 
   useEffect(() => {
-    if (leftTime === 0) {
-      setTimerStatus(TimerStatus.Idle);
+    console.log(leftTime);
+    if (leftTime !== 0) return;
+
+    handleStop();
+
+    if (
+      pomodoroStatus === PomodoroStatus.Break ||
+      pomodoroStatus === PomodoroStatus.BigBreak
+    ) {
+      setPomodoroStatus(PomodoroStatus.Work);
+      changeTimerTime(settings.pomodoroTime);
+      return;
+    }
+
+    if (settings.currentPomodoro === settings.countPomodors) {
+      setPomodoroStatus(PomodoroStatus.BigBreak);
+      changeTimerTime(settings.bigBreakTime);
+      dispatch(setNextPomodoro(1));
+    } else {
       setPomodoroStatus(PomodoroStatus.Break);
-      stopTimer();
+      changeTimerTime(settings.breakTime);
+      dispatch(setNextPomodoro(settings.currentPomodoro + 1));
     }
   }, [leftTime]);
 
@@ -46,21 +62,13 @@ const Timer: FC = () => {
     playTimer();
   };
 
-  const handleBreak = () => {
-    playTimer();
-  };
-
   const handlePause = () => {
     setTimerStatus(TimerStatus.Pause);
     pauseTimer();
   };
 
-  const handleContinue = () => {
-    setTimerStatus(TimerStatus.Timer);
-    playTimer();
-  };
-
   const handleStop = () => {
+    setTimerStatus(TimerStatus.Idle);
     stopTimer();
   };
 
@@ -70,32 +78,48 @@ const Timer: FC = () => {
     <div
       className={`flex flex-col gap-5 items-center justify-center rounded-lg p-5 shadow-md shadow-gray ${bgColorClass}`}
     >
-      <TimerDisplay time={leftTime} settings={settings} />
+      <TimerDisplay
+        time={leftTime}
+        settings={settings}
+        pomodoroStatus={pomodoroStatus}
+      />
       <TimerButtons
         status={timerStatus}
         startHadnler={handleTimer}
         pauseHandler={handlePause}
-        continueHandler={handleContinue}
         stopHandler={handleStop}
-        startBreak={handleBreak}
       />
     </div>
   );
 };
 
-const TimerDisplay: FC<{ time: number; settings: Settings }> = ({
+type TimerDisplayProps = {
+  time: number;
+  settings: Settings;
+  pomodoroStatus: PomodoroStatus;
+};
+
+const TimerDisplay: FC<TimerDisplayProps> = ({
   time,
   settings,
+  pomodoroStatus,
 }) => {
   const { seconds, minutes } = msToTime(time);
+  const countPomodorsToBigBreak =
+    settings.countPomodors + 1 - settings.currentPomodoro;
+
   return (
     <div className="flex flex-col gap-4">
       <div className="text-9xl text-white">
         <span>{minutes}</span>:<span>{seconds}</span>
       </div>
-      <div className="  text-lg text-white font-semibold">
-        До большого перерыва {settings.countPomodors - settings.currentPomodoro}{" "}
-        помидора
+
+      <div className="text-lg text-white font-semibold">
+        {pomodoroStatus !== PomodoroStatus.BigBreak ? (
+          <>До большого перерыва {countPomodorsToBigBreak} помидора</>
+        ) : (
+          <>Большой перерыв</>
+        )}
       </div>
     </div>
   );
@@ -106,17 +130,13 @@ type TimerButtonsProps = {
   pauseHandler: () => void;
   startHadnler: () => void;
   stopHandler: () => void;
-  continueHandler: () => void;
-  startBreak: () => void;
 };
 
 const TimerButtons: FC<TimerButtonsProps> = ({
   status,
   startHadnler,
-  continueHandler,
   stopHandler,
   pauseHandler,
-  startBreak,
 }) => {
   if (status === TimerStatus.Timer) {
     return (
@@ -134,7 +154,7 @@ const TimerButtons: FC<TimerButtonsProps> = ({
   if (status === TimerStatus.Pause) {
     return (
       <div className="flex items-center justify-around gap-3">
-        <Button onClick={continueHandler} theme="white">
+        <Button onClick={startHadnler} theme="white">
           Возобновить
         </Button>
         <Button onClick={stopHandler} theme="black">
@@ -143,19 +163,6 @@ const TimerButtons: FC<TimerButtonsProps> = ({
       </div>
     );
   }
-
-  // if (status === TimerStatus.Break) {
-  //   return (
-  //     <div className="flex items-center justify-around gap-3">
-  //       <Button onClick={startBreak} theme="white">
-  //         Начать
-  //       </Button>
-  //       <Button onClick={stopHandler} theme="black">
-  //         Пропустить
-  //       </Button>
-  //     </div>
-  //   );
-  // }
 
   if (status === TimerStatus.Idle) {
     return (
