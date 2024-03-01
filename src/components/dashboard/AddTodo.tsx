@@ -53,13 +53,14 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
         placeholder="Заголовок"
       />
       <textarea
-        className="p-0 w-full text-sm outline-none max-h-40 resize-none"
+        className="p-0 w-full text-sm outline-none max-h-40 mb-3 resize-none"
         placeholder="Описание"
         onChange={setScrollHeight}
       />
+      <div className="flex"></div>
       <div className="flex">
         <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-6 h-6 m-0 p-0 mr-2">
-          <Svg width={16} height={16} iconId="icon-star" />
+          <Svg width={16} height={16} iconId="icon-flag" />
         </button>
 
         <Hashtags setHashtags={() => {}} hashtags={[]} isActive={true} />
