@@ -8,7 +8,7 @@ type HashtagsProps = {
 
 const Hashtags: FC<HashtagsProps> = ({ hashtags, isActive, setHashtags }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  console.log(isActive);
+  // (isActive);
   const addHashtagHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setHashtags([...hashtags, e.target.value]);
@@ -21,11 +21,11 @@ const Hashtags: FC<HashtagsProps> = ({ hashtags, isActive, setHashtags }) => {
 
   return (
     <div className=" relative">
-      <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-6 h-6 m-0 p-0">
+      <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-8 h-8 m-0 p-0">
         <Svg width={16} height={16} iconId="icon-tag" />
       </button>
       {isActive && (
-        <div className=" absolute top-full left-1/2 -translate-x-1/2">
+        <div className=" absolute top-7 -left-7 p-2 border border-gray-300 rounded bg-white">
           <ul>
             {hashtags.map((hashtag) => (
               <li className=" flex bg-slate-950 rounded-2xl">

@@ -32,7 +32,6 @@ const Timer: FC = () => {
     });
 
   useEffect(() => {
-    console.log(leftTime);
     if (leftTime !== 0) return;
 
     handleStop();

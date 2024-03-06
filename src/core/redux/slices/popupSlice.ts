@@ -16,11 +16,9 @@ export const popupSlice = createSlice({
   reducers: {
     setIsOpenTodoPopup: (state, action: PayloadAction<boolean>) => {
       state.isOpenTodoPopup = action.payload;
-      console.log(state.isOpenTodoPopup);
     },
     setTodoPopupSectionId: (state, action: PayloadAction<string>) => {
       state.todoPopupSectionId = action.payload;
-      console.log(state.todoPopupSectionId);
     },
   },
 });

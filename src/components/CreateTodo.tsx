@@ -13,7 +13,6 @@ const CreateTodo: FC = () => {
         className="text-sm bg-transparent outline-none resize-none max-h-[5em] h-auto"
         placeholder="Описание"
       />
-      {/* <TextEditor /> */}
       <Counter />
     </form>
   );

@@ -12,9 +12,9 @@ export interface Settings {
 const initialState: Settings = {
   countPomodors: 4,
   currentPomodoro: 1,
-  pomodoroTime: 5_000, // 25 * 60 * 1000
-  breakTime: 10_000, // 5 * 60 * 1000
-  bigBreakTime: 20_000, // 20 * 60 * 1000
+  pomodoroTime: 25 * 60 * 1000,
+  breakTime: 5 * 60 * 1000,
+  bigBreakTime: 20 * 60 * 1000,
 };
 
 export const userSettingsSlice = createSlice({

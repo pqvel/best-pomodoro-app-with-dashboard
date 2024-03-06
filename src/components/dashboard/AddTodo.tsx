@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, LegacyRef, useRef } from "react";
+import { ChangeEvent, FC, LegacyRef, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { setTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import { createTodo } from "../../core/redux/slices/dashboardSlice";
 import { setScrollHeight } from "../../core/utils/setScrollHeight";
 import Svg from "../ui/Svg";
 import Hashtags from "../todoSettings/Hashtags";
+import Priorities from "../todoSettings/Priorities";
 
 // тултип это подсказка, нужно поменять названия
 type AddTodoProps = {
@@ -13,9 +14,6 @@ type AddTodoProps = {
   sectionId: string;
 };
 
-// const enum SettingsComponents {
-//   tag =
-// }
 const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
   const dispatch = useAppDispatch();
 
@@ -43,9 +41,11 @@ type AddTodoFormProps = {
 };
 
 const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
+  const [priority, setPriority] = useState<number>(4);
+
   return (
     <form
-      className=" bg-white rounded-lg border border-gray-300 p-3"
+      className="bg-white rounded-lg border border-gray-300 p-3"
       onSubmit={handleCreateTodo}
     >
       <input
@@ -59,11 +59,8 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
       />
       <div className="flex"></div>
       <div className="flex">
-        <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-6 h-6 m-0 p-0 mr-2">
-          <Svg width={16} height={16} iconId="icon-flag" />
-        </button>
-
-        <Hashtags setHashtags={() => {}} hashtags={[]} isActive={true} />
+        <Priorities setPriority={setPriority} activePriority={priority} />
+        <Hashtags setHashtags={() => {}} hashtags={[]} isActive={false} />
       </div>
     </form>
   );

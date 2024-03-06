@@ -79,10 +79,6 @@ const TextEditor: FC = () => {
     "size",
   ];
 
-  const handleProcedureContentChange = (content: any) => {
-    console.log("content---->", content);
-  };
-
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Text Editor In React JS</h1>
@@ -92,7 +88,6 @@ const TextEditor: FC = () => {
           modules={modules}
           formats={formats}
           placeholder="write your content ...."
-          onChange={handleProcedureContentChange}
           style={{ height: "220px" }}
         ></ReactQuill>
       </div>

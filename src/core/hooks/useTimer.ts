@@ -30,19 +30,18 @@ export const useTimer = ({
 
   let currTime: number = 0;
   let prevTime: number = 0;
-  // let pastTime: number = 0;
+  let pTime: number = 0;
 
   const playTimer = (): void => {
     prevTime = Date.now();
-
+    console.log(`pastTime ${pastTime}`);
+    pTime = pastTime;
     setTimerId(
       setInterval(() => {
-        console.log(pastTime);
         currTime = Date.now();
-        const newPastTime = pastTime + currTime - prevTime;
-        console.log(newPastTime);
-        setPastTime(newPastTime);
-        const newLeftTime = Math.ceil((timerTime - newPastTime) / 1000) * 1000;
+        pTime += currTime - prevTime;
+        setPastTime(pTime);
+        const newLeftTime = Math.ceil((timerTime - pTime) / 1000) * 1000;
         newLeftTime < 0 ? setLeftTime(0) : setLeftTime(newLeftTime);
 
         prevTime = Date.now();
@@ -57,8 +56,8 @@ export const useTimer = ({
   };
 
   const stopTimer = (): void => {
-    console.log("stopTimer");
     if (timerId) {
+      setPastTime(0);
       clearInterval(timerId);
       setTimerId(null);
       setLeftTime(0);

@@ -10,7 +10,7 @@ import { ChangeEvent } from "react";
 export const setScrollHeight = (e: ChangeEvent<HTMLTextAreaElement>): void => {
   const elementScrollHeight: number =
     e.target.scrollHeight - e.target.offsetHeight;
-  console.log(elementScrollHeight);
+
   if (elementScrollHeight !== 0) {
     e.target.style.height = e.target.offsetHeight + elementScrollHeight + "px";
   }

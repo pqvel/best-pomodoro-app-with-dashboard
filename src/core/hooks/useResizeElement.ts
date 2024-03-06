@@ -35,7 +35,7 @@ export const useResizeElement: UseResizeElement = () => {
   };
 
   const mouseMoveHandler = (e: MouseEvent): void => {
-    console.log(isResized.current);
+    // console.log(isResized.current);
     if (isResized.current) {
       const element = resizeElement.current;
       element!.style.width = `${element!.offsetWidth}${e.movementX}px`;
