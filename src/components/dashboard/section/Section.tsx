@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import SwitchTextInput from "../../switchTextInput/SwitchTextInput";
 import Todo from "../todo/Todo";
 import AddTodo from "../AddTodo";
-import Svg from "../../ui/Svg";
+import ConfirmPopup from "../../popups/ConfirmPopup";
+import { Svg, Button } from "../../ui";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import {
   SectionType,
@@ -19,6 +20,11 @@ type SectionProps = {
 
 const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   const dispatch = useAppDispatch();
+  const [isOpenDeletePopup, setOpenDeletePopup] = useState<boolean>(false);
+
+  const deleteSectionHandler = () => {
+    dispatch(deleteSection({ dashboardId, sectionId: section.id }));
+  };
 
   return (
     <>
@@ -41,13 +47,12 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
               {section.title}
             </h3>
             <span onClick={(e) => e.stopPropagation()}>2</span>
-            <button
-              onClick={() =>
-                dispatch(deleteSection({ dashboardId, sectionId: section.id }))
-              }
+            <Button
+              theme="transparent"
+              onClick={() => setOpenDeletePopup(true)}
             >
               <Svg width={24} height={24} iconId="icon-trash" />
-            </button>
+            </Button>
           </div>
         </SwitchTextInput>
         {section.todos.map((todo) => (
@@ -55,6 +60,15 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         ))}
         <AddTodo dashboardId={dashboardId} sectionId={section.id} />
       </div>
+      {isOpenDeletePopup && (
+        <ConfirmPopup
+          title="Вы уверены?"
+          descr="Все задачи из текущей секции будут удалены без возможности восстановить."
+          iconId="icon-alert"
+          confirmHandler={deleteSectionHandler}
+          closeHandler={() => setOpenDeletePopup(false)}
+        />
+      )}
     </>
   );
 };
