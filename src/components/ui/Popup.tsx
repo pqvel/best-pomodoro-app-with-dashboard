@@ -2,7 +2,7 @@ import { FC } from "react";
 import { createPortal } from "react-dom";
 import Svg from "./Svg";
 
-const popupSizes = {
+const popupSizes: { small: string; medium: string; large: string } = {
   small: "max-w-sm",
   medium: "max-w-3xl",
   large: "max-w-5xl ",

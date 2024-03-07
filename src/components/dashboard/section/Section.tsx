@@ -5,6 +5,7 @@ import AddTodo from "../AddTodo";
 import ConfirmPopup from "../../popups/ConfirmPopup";
 import { Svg, Button } from "../../ui";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
+import { usePopup } from "../../../core/hooks/usePopup";
 import {
   SectionType,
   createTodo,
@@ -20,7 +21,7 @@ type SectionProps = {
 
 const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   const dispatch = useAppDispatch();
-  const [isOpenDeletePopup, setOpenDeletePopup] = useState<boolean>(false);
+  const { togglePopup, isOpen } = usePopup();
 
   const deleteSectionHandler = () => {
     dispatch(deleteSection({ dashboardId, sectionId: section.id }));
@@ -47,10 +48,7 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
               {section.title}
             </h3>
             <span onClick={(e) => e.stopPropagation()}>2</span>
-            <Button
-              theme="transparent"
-              onClick={() => setOpenDeletePopup(true)}
-            >
+            <Button className="p-1" theme="transparent" onClick={togglePopup}>
               <Svg width={24} height={24} iconId="icon-trash" />
             </Button>
           </div>
@@ -60,13 +58,13 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         ))}
         <AddTodo dashboardId={dashboardId} sectionId={section.id} />
       </div>
-      {isOpenDeletePopup && (
+      {isOpen && (
         <ConfirmPopup
           title="Вы уверены?"
-          descr="Все задачи из текущей секции будут удалены без возможности восстановить."
+          descr="Все задачи из текущей секции будут удалены без возможности восстановления."
           iconId="icon-alert"
           confirmHandler={deleteSectionHandler}
-          closeHandler={() => setOpenDeletePopup(false)}
+          closeHandler={togglePopup}
         />
       )}
     </>
