@@ -27,7 +27,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`flex items-center justify-center cursor-pointer rounded px-3 py-1 ${buttonStyles[theme]} ${className}`}
+      className={`flex items-center justify-center cursor-pointer rounded  ${buttonStyles[theme]} ${className}`}
       onClick={onClick}
       onKeyDown={onKeyDown}
       disabled={disabled}
