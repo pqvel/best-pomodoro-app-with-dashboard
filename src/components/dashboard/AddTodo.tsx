@@ -14,6 +14,7 @@ type AddTodoProps = {
 };
 
 const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
+  const dispatch = useAppDispatch();
   const todoPopupSectionId = useAppSelector(
     (state) => state.popup.todoPopupSectionId
   );

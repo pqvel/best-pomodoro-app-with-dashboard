@@ -140,10 +140,10 @@ const TimerButtons: FC<TimerButtonsProps> = ({
   if (status === TimerStatus.Timer) {
     return (
       <div className="flex items-center justify-around gap-3">
-        <Button onClick={pauseHandler} theme="white">
+        <Button className="py-1 px-4" onClick={pauseHandler} theme="white">
           Пауза
         </Button>
-        <Button onClick={stopHandler} theme="black">
+        <Button className="py-1 px-4" onClick={stopHandler} theme="black">
           Закончить
         </Button>
       </div>
@@ -153,10 +153,10 @@ const TimerButtons: FC<TimerButtonsProps> = ({
   if (status === TimerStatus.Pause) {
     return (
       <div className="flex items-center justify-around gap-3">
-        <Button onClick={startHadnler} theme="white">
+        <Button className="py-1 px-4" onClick={startHadnler} theme="white">
           Возобновить
         </Button>
-        <Button onClick={stopHandler} theme="black">
+        <Button className="py-1 px-4" onClick={stopHandler} theme="black">
           Закончить
         </Button>
       </div>
@@ -166,7 +166,7 @@ const TimerButtons: FC<TimerButtonsProps> = ({
   if (status === TimerStatus.Idle) {
     return (
       <div className="flex items-center justify-around gap-3">
-        <Button onClick={startHadnler} theme="white">
+        <Button className="py-1 px-4" theme="white" onClick={startHadnler}>
           Начать
         </Button>
       </div>

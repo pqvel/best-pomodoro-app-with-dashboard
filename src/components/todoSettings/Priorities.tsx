@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { Button, Svg } from "../ui";
 import { useSelect } from "../../core/hooks/useSelect";
 
@@ -23,10 +23,10 @@ const priorities: Priority[] = [
 const Priorities: FC<Props> = ({ setPriority, activePriority }) => {
   const { isOpen, openSelect, closeSelect, toggleSelect } = useSelect();
 
-  const handleChangePriority = (priority: number) => {
-    console.log(priority);
-    setPriority(priority);
-    closeSelect();
+  const handleChangePriority = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    setPriority(+e.target.value);
+    // closeSelect();
   };
 
   return (
@@ -45,10 +45,7 @@ const Priorities: FC<Props> = ({ setPriority, activePriority }) => {
       </Button>
 
       {isOpen && (
-        <div
-          className="absolute top-9 -left-4 flex flex-col border border-gray-300 rounded-md whitespace-nowrap overflow-hidden"
-          onClick={openSelect}
-        >
+        <div className="absolute top-9 -left-4 flex flex-col border border-gray-300 rounded-md whitespace-nowrap overflow-hidden">
           {priorities.map((priority) => (
             <label
               className={`bg-white hover:bg-slate-200 flex items-centers flex-shrink-0 py-2 px-3 ${
@@ -59,7 +56,7 @@ const Priorities: FC<Props> = ({ setPriority, activePriority }) => {
               <input
                 className="hidden"
                 name="priority"
-                onChange={() => handleChangePriority(priority.value)}
+                onChange={handleChangePriority}
                 value={priority.value}
                 type="radio"
                 checked={priority.value === activePriority}

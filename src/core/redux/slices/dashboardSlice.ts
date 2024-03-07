@@ -28,7 +28,6 @@ const initialState: DashboardType[] = [
             title: "Сделать годовой отчет",
             descr: "Дописать последние страницы",
             priority: 1,
-            deadline: 100,
             hashtags: [],
           }),
         ],

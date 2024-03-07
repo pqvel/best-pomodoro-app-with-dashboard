@@ -7,24 +7,21 @@ export interface User {
   email: string;
 }
 
-const initialState: Array<User> = [
-  {
-      id: '1',
-      name: 'John Doe',
-      email: 'john@test.com',
-  }
-]
+const initialState: User = {
+  id: "1",
+  name: "John Doe",
+  email: "john@test.com",
+};
 
 export const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<User>) => {
-      state.push(action.payload);
+    setUser: (state, action: PayloadAction<User>) => {
+      state = action.payload;
     },
   },
 });
-export const { addUser } =
-  userSlice.actions;
+export const { setUser } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;
 export default userSlice.reducer;

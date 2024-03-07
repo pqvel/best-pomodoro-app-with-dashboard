@@ -6,7 +6,6 @@ export interface ITodo {
   title: string;
   descr?: string;
   priority?: number;
-  deadline?: number;
   hashtags?: string[];
 }
 
@@ -14,7 +13,6 @@ type TodoModelConstructor = {
   title: string;
   descr?: string;
   priority?: number;
-  deadline?: number;
   hashtags?: string[];
 };
 
@@ -24,20 +22,17 @@ export class TodoModel implements ITodo {
   title: string;
   descr: string;
   priority: number;
-  deadline: number;
   hashtags: string[];
 
   constructor({
     title,
     descr = "",
     priority = 0,
-    deadline = 0,
     hashtags = [],
   }: TodoModelConstructor) {
     this.title = title;
     this.descr = descr;
     this.priority = priority;
-    this.deadline = deadline;
     this.hashtags = hashtags;
   }
 }

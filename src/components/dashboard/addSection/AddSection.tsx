@@ -41,6 +41,7 @@ const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
       />
       <div className="flex gap-2">
         <Button
+          className="px-2 py-1"
           onKeyDown={enterHandler}
           onClick={addSectionHandler}
           disabled={isDisabledBtn}
