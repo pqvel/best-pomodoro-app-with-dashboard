@@ -1,6 +1,7 @@
 import { ChangeEvent, KeyboardEvent, FC, useRef, useState } from "react";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import { addSection } from "../../../core/redux/slices/dashboardSlice";
+import { Button } from "../../ui";
 
 const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
   const dispatch = useAppDispatch();
@@ -39,14 +40,14 @@ const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
         maxLength={50}
       />
       <div className="flex gap-2">
-        <button
-          className="button button-black"
+        <Button
           onKeyDown={enterHandler}
           onClick={addSectionHandler}
           disabled={isDisabledBtn}
         >
           Добавить раздел
-        </button>
+        </Button>
+
         <button onClick={resetInput}>Отмена</button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, LegacyRef, useRef, useState } from "react";
+import { ChangeEvent, FC, LegacyRef, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { setTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { setScrollHeight } from "../../core/utils/setScrollHeight";
 import Svg from "../ui/Svg";
 import Hashtags from "../todoSettings/Hashtags";
 import Priorities from "../todoSettings/Priorities";
+import Button from "../ui/Button";
 
 // тултип это подсказка, нужно поменять названия
 type AddTodoProps = {
@@ -33,15 +34,30 @@ const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
     );
   }
 
-  return <AddTodoForm handleCreateTodo={handleSubmit(handleCreateTodo)} />;
+  return (
+    <AddTodoForm
+      handleCreateTodo={handleSubmit(handleCreateTodo)}
+      closeForm={() => dispatch(setTodoPopupSectionId(""))}
+    />
+  );
 };
 
 type AddTodoFormProps = {
   handleCreateTodo: () => void;
+  closeForm: () => void;
 };
 
-const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
+const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo, closeForm }) => {
   const [priority, setPriority] = useState<number>(4);
+  const [hashtags, setHashtags] = useState<string[]>([]);
+
+  const addHashtag = (newHashtag: string) => {
+    setHashtags([...hashtags, newHashtag]);
+  };
+
+  const removeHashtag = (hashtag: string) => {
+    setHashtags((hashtags) => hashtags.filter((h) => h !== hashtag));
+  };
 
   return (
     <form
@@ -60,7 +76,23 @@ const AddTodoForm: FC<AddTodoFormProps> = ({ handleCreateTodo }) => {
       <div className="flex"></div>
       <div className="flex">
         <Priorities setPriority={setPriority} activePriority={priority} />
-        <Hashtags setHashtags={() => {}} hashtags={[]} isActive={false} />
+        <Hashtags
+          addHashtag={addHashtag}
+          hashtags={hashtags}
+          isActive={false}
+        />
+        <div className="flex ml-auto">
+          <Button
+            className="px-0 py-0 h-8 w-8 mr-2"
+            theme="gray"
+            onClick={closeForm}
+          >
+            <Svg width={20} height={20} iconId="icon-close" />
+          </Button>
+          <Button className="px-0 py-0 h-8 w-8" onClick={handleCreateTodo}>
+            <Svg width={20} height={20} iconId="icon-plus" />
+          </Button>
+        </div>
       </div>
     </form>
   );

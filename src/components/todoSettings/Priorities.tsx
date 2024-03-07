@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Svg from "../ui/Svg";
+import { Button, Svg } from "../ui";
 import { useSelect } from "../../core/hooks/useSelect";
 
 type Priority = {
@@ -21,32 +21,48 @@ const priorities: Priority[] = [
 ];
 
 const Priorities: FC<Props> = ({ setPriority, activePriority }) => {
-  const { isOpen, openSelect } = useSelect();
-  console.log(activePriority);
+  const { isOpen, openSelect, closeSelect, toggleSelect } = useSelect();
+
+  const handleChangePriority = (priority: number) => {
+    console.log(priority);
+    setPriority(priority);
+    closeSelect();
+  };
+
   return (
     <div className="relative">
-      <button
-        onClick={openSelect}
-        className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-8 h-8 m-0 p-0 mr-2"
+      <Button
+        className="px-0 py-0 w-8 h-8 mr-2"
+        theme="white"
+        onClick={toggleSelect}
       >
         <Svg
           className={priorities[activePriority - 1].iconColor}
-          width={16}
-          height={16}
+          width={18}
+          height={18}
           iconId="icon-flag"
         />
-      </button>
+      </Button>
 
       {isOpen && (
-        <div className="absolute top-9 -left-4 flex flex-col border border-gray-300 rounded-md whitespace-nowrap overflow-hidden">
+        <div
+          className="absolute top-9 -left-4 flex flex-col border border-gray-300 rounded-md whitespace-nowrap overflow-hidden"
+          onClick={openSelect}
+        >
           {priorities.map((priority) => (
-            <label className="bg-white hover:bg-slate-100 flex items-centers flex-shrink-0 py-2 px-3">
+            <label
+              className={`bg-white hover:bg-slate-200 flex items-centers flex-shrink-0 py-2 px-3 ${
+                priority.value === activePriority ? "bg-slate-200" : "bg-white"
+              }`}
+              key={priority.value}
+            >
               <input
                 className="hidden"
                 name="priority"
-                onChange={() => setPriority(priority.value)}
+                onChange={() => handleChangePriority(priority.value)}
                 value={priority.value}
                 type="radio"
+                checked={priority.value === activePriority}
               />
               <Svg
                 className={`mr-2 ${priority.iconColor}`}

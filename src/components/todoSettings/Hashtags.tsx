@@ -1,52 +1,62 @@
-import { FC, useRef, ChangeEvent } from "react";
-import Svg from "../ui/Svg";
+import { FC, useRef, MouseEvent, useMemo } from "react";
+import { Button, Svg } from "../ui";
+import { useSelect } from "../../core/hooks/useSelect";
+
 type HashtagsProps = {
   hashtags: string[];
-  setHashtags: (hashtags: string[]) => void;
+  addHashtag: (hashtags: string) => void;
   isActive: boolean;
 };
 
-const Hashtags: FC<HashtagsProps> = ({ hashtags, isActive, setHashtags }) => {
+const Hashtags: FC<HashtagsProps> = ({ hashtags, isActive, addHashtag }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  // (isActive);
-  const addHashtagHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      setHashtags([...hashtags, e.target.value]);
-    }
-  };
+  const { isOpen, openSelect, closeSelect, toggleSelect } = useSelect();
 
-  const removeHashtagHandler = (removeHashtag: string) => {
-    setHashtags(hashtags.filter((hashtag) => hashtag !== removeHashtag));
+  const filteredHashtags = useMemo(() => {
+    return hashtags.filter((hashtag) => hashtag !== inputRef.current!.value);
+  }, []);
+
+  const addHashtagHandler = () => {
+    const hashtag = inputRef.current!.value;
+
+    if (hashtag.length >= 2) {
+      addHashtag(hashtag);
+    }
   };
 
   return (
     <div className=" relative">
-      <button className="flex items-center justify-center rounded border border-gray-300 bg-slate-50 hover:bg-slate-100 transition outline-none text-black w-8 h-8 m-0 p-0">
-        <Svg width={16} height={16} iconId="icon-tag" />
-      </button>
-      {isActive && (
-        <div className=" absolute top-7 -left-7 p-2 border border-gray-300 rounded bg-white">
-          <ul>
-            {hashtags.map((hashtag) => (
-              <li className=" flex bg-slate-950 rounded-2xl">
-                {hashtag}
-                <button onClick={() => removeHashtagHandler(hashtag)}>
-                  <Svg
-                    className="text-white"
-                    width={12}
-                    height={12}
-                    iconId="icon-close"
-                  />
-                </button>
-              </li>
+      <Button
+        className="px-0 py-0 w-8 h-8"
+        theme="white"
+        onClick={toggleSelect}
+      >
+        <Svg width={18} height={18} iconId="icon-tag" />
+      </Button>
+      {isOpen && (
+        <div
+          className="absolute top-9 -left-4 flex flex-col border bg-white border-gray-300 rounded-md whitespace-nowrap overflow-hidden w-64"
+          onClick={openSelect}
+        >
+          <div className="flex p-2 border-b border-b-gray-300">
+            <input
+              className="bg-gray-50 mr-2 h-8 border border-gray-300 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+              type="text"
+              ref={inputRef}
+            />
+            <Button
+              className="px-0 py-0 w-full max-w-8 h-8"
+              theme="white"
+              onClick={addHashtagHandler}
+            >
+              <Svg width={18} height={18} iconId="icon-plus" />
+            </Button>
+          </div>
+          <ul className="flex flex-col ">
+            {hashtags.fil.map((hashtag) => (
+              <li className=" flex bg-slate-950 rounded-2xl">{hashtag}</li>
             ))}
           </ul>
-          <div className="flex">
-            <input ref={inputRef} type="text" />
-            <button>
-              <Svg width={16} height={16} iconId="icon-plus" />
-            </button>
-          </div>
         </div>
       )}
     </div>

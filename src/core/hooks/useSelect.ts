@@ -4,6 +4,7 @@ type UseSelectReturn = {
   isOpen: boolean;
   closeSelect: () => void;
   openSelect: (event: MouseEvent<HTMLElement>) => void;
+  toggleSelect: (event: MouseEvent<HTMLElement>) => void;
 };
 
 export const useSelect = (): UseSelectReturn => {
@@ -22,19 +23,26 @@ export const useSelect = (): UseSelectReturn => {
   }, [isOpen]);
 
   const openSelect = (event: MouseEvent<HTMLElement>) => {
-    console.log("open");
     event.stopPropagation();
     setIsOpen(true);
   };
 
   const closeSelect = () => {
-    console.log("close");
     setIsOpen(false);
+  };
+
+  const toggleSelect = (event: MouseEvent<HTMLElement>) => {
+    if (isOpen) {
+      closeSelect();
+    } else {
+      openSelect(event);
+    }
   };
 
   return {
     isOpen,
     closeSelect,
     openSelect,
+    toggleSelect,
   };
 };
