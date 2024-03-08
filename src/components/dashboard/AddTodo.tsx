@@ -19,8 +19,9 @@ const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
 
   if (sectionId !== todoPopupSectionId) {
     return (
-      <Button onClick={openTodoForm}>
-        <Svg width={20} height={20} iconId="icon-plus" /> Добавить задачу
+      <Button className="px-2 py-1" theme="transparent" onClick={openTodoForm}>
+        Добавить задачу
+        <Svg className="ml-2" width={20} height={20} iconId="icon-plus" />
       </Button>
     );
   }

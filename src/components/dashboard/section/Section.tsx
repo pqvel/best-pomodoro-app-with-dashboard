@@ -1,18 +1,16 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { Svg, Button } from "../../ui";
 import SwitchTextInput from "../../switchTextInput/SwitchTextInput";
 import Todo from "../todo/Todo";
 import AddTodo from "../AddTodo";
 import ConfirmPopup from "../../popups/ConfirmPopup";
-import { Svg, Button } from "../../ui";
 import { useAppDispatch } from "../../../core/redux/app/hooks";
 import { usePopup } from "../../../core/hooks/usePopup";
 import {
   SectionType,
-  createTodo,
   changeSectionTitle,
   deleteSection,
 } from "../../../core/redux/slices/dashboardSlice";
-import { setIsOpenTodoPopup } from "../../../core/redux/slices/popupSlice";
 
 type SectionProps = {
   section: SectionType;
@@ -27,21 +25,23 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
     dispatch(deleteSection({ dashboardId, sectionId: section.id }));
   };
 
+  const editSectionTitle = (title: string) => {
+    dispatch(
+      changeSectionTitle({
+        dashboardId,
+        sectionId: section.id,
+        title,
+      })
+    );
+  };
+
   return (
     <>
-      <div className="dashboard__section flex flex-col gap-3">
+      <div className="dashboard__section flex flex-col gap-3 w-72">
         <SwitchTextInput
           editTextClass="input h3"
           value={section.title}
-          editHandler={(value) =>
-            dispatch(
-              changeSectionTitle({
-                dashboardId,
-                sectionId: section.id,
-                title: value,
-              })
-            )
-          }
+          editHandler={editSectionTitle}
         >
           <div className="flex justify-between items-center">
             <h3 className="h3 rounded-4 px-2 py-1 bg-[#dddddd]">

@@ -51,7 +51,7 @@ const TodoForm: FC<TodoFormProps> = ({ closeForm, dashboardId, sectionId }) => {
 
   return (
     <form
-      className="bg-white rounded-lg border border-gray-300 p-3"
+      className="bg-white rounded-lg border border-gray-300 p-3 max-w-72 w-full"
       onSubmit={addTodo}
     >
       <input

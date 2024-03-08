@@ -29,7 +29,7 @@ const AddSection: FC<{ dashboardId: string }> = ({ dashboardId }) => {
   };
 
   return (
-    <div className="dashboard__section flex flex-col">
+    <div className="dashboard__section flex flex-col w-72">
       <input
         className="input mb-2"
         ref={input}
