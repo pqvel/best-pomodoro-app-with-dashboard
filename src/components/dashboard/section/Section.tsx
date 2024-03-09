@@ -39,7 +39,7 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
     <>
       <div className="dashboard__section flex flex-col gap-3 w-72">
         <SwitchTextInput
-          editTextClass="input h3"
+          editTextClass="w-72"
           value={section.title}
           editHandler={editSectionTitle}
         >

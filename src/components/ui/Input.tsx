@@ -1,16 +1,16 @@
 import { FC } from "react";
 
-type Props = {
-  placeholder: string;
+type TextInputProps = {
+  placeholder?: string;
 };
 
-export const TextInput: FC<Props> = ({ placeholder }) => (
+export const TextInput: FC<TextInputProps> = ({ placeholder = "" }) => (
   <input
-    className="w-full px-2 py-2 border border-grayBorder rounded-sm"
+    className="bg-gray-50 mr-2 h-8 border border-gray-300 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
     placeholder={placeholder}
   />
 );
 
-export const Textarea = () => {
-  return <Textarea></Textarea>;
+export const Input = {
+  TextInput,
 };
