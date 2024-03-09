@@ -1,4 +1,11 @@
-import { FC, ReactElement, ReactNode, MouseEvent, KeyboardEvent } from "react";
+import {
+  FC,
+  ReactElement,
+  ReactNode,
+  MouseEvent,
+  KeyboardEvent,
+  LegacyRef,
+} from "react";
 
 const buttonStyles = {
   black: "bg-slate-950 text-white hover:bg-black",
@@ -13,6 +20,7 @@ type ButtonProps = {
   className?: string;
   theme?: "black" | "white" | "transparent" | "gray";
   iconId?: string;
+  ref?: LegacyRef<HTMLButtonElement>;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLButtonElement>) => void;
 };
@@ -22,6 +30,7 @@ const Button: FC<ButtonProps> = ({
   className = "",
   disabled = false,
   theme = "black",
+  ref = null,
   onClick,
   onKeyDown,
 }) => {
@@ -31,6 +40,7 @@ const Button: FC<ButtonProps> = ({
       onClick={onClick}
       onKeyDown={onKeyDown}
       disabled={disabled}
+      ref={ref}
       type="button"
     >
       {children}
