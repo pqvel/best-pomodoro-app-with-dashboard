@@ -15,7 +15,7 @@ interface INavItem {
 
 const navItems: INavItem[] = [
   {
-    href: "/",
+    href: "/timer",
     iconPath: `icon-timer`,
     title: "Timer",
   },

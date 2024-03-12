@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ITodo } from "../../../core/models/TodoModel";
-import { Svg, Button } from "../../ui";
+import { Svg, Input } from "../../ui";
 
 type TodoProps = {
   todo: ITodo;
@@ -24,36 +24,32 @@ const Todo: FC<TodoProps> = ({ todo, editHandler }) => {
   const flagClass = priorities.find(
     (priority) => priority.value === todo.priority
   )!.iconColor;
+
   return (
-    <div className="relative flex flex-col bg-white p-3 rounded-md border border-gray-300 max-w-72 w-full">
-      <div>
+    <div className="relative flex flex-col cursor-pointer bg-white p-3 rounded-md border border-gray-300 max-w-72 w-full">
+      <div className="flex items-center pr-5">
         <Svg
-          className={`flex ${flagClass}`}
-          width={14}
-          height={14}
+          className={`mr-2 min-w-[16px] ${flagClass}`}
+          width={16}
+          height={16}
           iconId="icon-flag"
         />
-        <h4 className="text-base font-medium mb-1">{todo.title}</h4>
+        <h4 className="text-base font-medium w-full truncate">{todo.title}</h4>
       </div>
-
-      <p className="text-sm">{todo.descr}</p>
-      <Button
-        className="absolute right-2 top-2 px-0 py-0 w-6 h-6"
-        theme="transparent"
-        onClick={editHandler}
-      >
-        <Svg iconId="icon-options" width={20} height={20} />
-      </Button>
-      <div className="flex flex-wrap mt-2">
-        {todo.hashtags.map((hashtag) => (
-          <div
-            className="bg-gray-200 text-gray-500 px-2 rounded-xl mb-1 mr-1"
-            key={hashtag}
-          >
-            @{hashtag}
-          </div>
-        ))}
-      </div>
+      {todo.descr && <p className="text-sm line-clamp-5 mt-1">{todo.descr}</p>}
+      {todo.hashtags.length > 0 && (
+        <div className="flex flex-wrap mt-2">
+          {todo.hashtags.map((hashtag) => (
+            <div
+              className="bg-gray-200 text-gray-500 px-2 rounded-xl mb-1 mr-1"
+              key={hashtag}
+            >
+              @{hashtag}
+            </div>
+          ))}
+        </div>
+      )}
+      <Input.CheckboxInput className=" absolute right-3 top-3.5" />
     </div>
   );
 };

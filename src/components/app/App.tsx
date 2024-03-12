@@ -12,7 +12,7 @@ const App: FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<TimerPage />} />
+      <Route path="/timer" element={<TimerPage />} />
       <Route path="/todos" element={<TodosPage />} />
       <Route path="/stats" element={<StatsPage />} />
       <Route path="/info" element={<InfoPage />} />

@@ -14,14 +14,14 @@ export const popupSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    setIsOpenTodoPopup: (state, action: PayloadAction<boolean>) => {
-      state.isOpenTodoPopup = action.payload;
-    },
-    setTodoPopupSectionId: (state, action: PayloadAction<string>) => {
+    // setTodoPopupActiveTodo: (state, action: PayloadAction<boolean>) => {
+    //   state.isOpenTodoPopup = action.payload;
+    // },
+    setAddTodoPopupSectionId: (state, action: PayloadAction<string>) => {
       state.todoPopupSectionId = action.payload;
     },
   },
 });
 
-export const { setIsOpenTodoPopup, setTodoPopupSectionId } = popupSlice.actions;
+export const { setAddTodoPopupSectionId } = popupSlice.actions;
 export default popupSlice.reducer;

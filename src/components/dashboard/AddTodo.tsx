@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Svg, Button } from "../ui";
 import TodoForm from "../forms/TodoForm";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
-import { setTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
+import { setAddTodoPopupSectionId } from "../../core/redux/slices/popupSlice";
 
 type AddTodoProps = {
   dashboardId: string;
@@ -14,7 +14,7 @@ const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
   const { todoPopupSectionId } = useAppSelector((state) => state.popup);
 
   const openTodoForm = () => {
-    dispatch(setTodoPopupSectionId(sectionId));
+    dispatch(setAddTodoPopupSectionId(sectionId));
   };
 
   if (sectionId !== todoPopupSectionId) {
@@ -30,7 +30,7 @@ const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
     <TodoForm
       dashboardId={dashboardId}
       sectionId={sectionId}
-      closeForm={() => dispatch(setTodoPopupSectionId(""))}
+      closeForm={() => dispatch(setAddTodoPopupSectionId(""))}
     />
   );
 };

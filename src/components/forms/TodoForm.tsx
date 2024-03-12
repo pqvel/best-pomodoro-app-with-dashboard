@@ -100,7 +100,11 @@ const TodoForm: FC<TodoFormProps> = ({ closeForm, dashboardId, sectionId }) => {
           >
             <Svg width={20} height={20} iconId="icon-close" />
           </Button>
-          <Button className="px-0 py-0 h-8 w-8" onClick={addTodo}>
+          <Button
+            className="px-0 py-0 h-8 w-8"
+            onClick={addTodo}
+            disabled={title.length === 0}
+          >
             <Svg width={20} height={20} iconId="icon-plus" />
           </Button>
         </div>
