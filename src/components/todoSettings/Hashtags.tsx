@@ -1,4 +1,4 @@
-import { FC, useRef, MouseEvent, useMemo, useState } from "react";
+import { FC, KeyboardEvent, useMemo, useState } from "react";
 import { Button, Svg } from "../ui";
 import { useSelect } from "../../core/hooks/useSelect";
 
@@ -24,6 +24,12 @@ const Hashtags: FC<HashtagsProps> = ({ hashtags, addHashtag }) => {
     }
   };
 
+  const enterPriority = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      addHashtagHandler();
+    }
+  };
+
   return (
     <div className=" relative">
       <Button
@@ -36,13 +42,14 @@ const Hashtags: FC<HashtagsProps> = ({ hashtags, addHashtag }) => {
       {isOpen && (
         <div
           className="absolute top-9 -left-4 flex flex-col border bg-white border-gray-300 rounded-md whitespace-nowrap overflow-hidden w-64"
-          onClick={openSelect}
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex p-2">
             <input
               className="bg-gray-50 mr-2 h-8 border border-gray-300 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
               type="text"
               onChange={(event) => setValue(event.target.value)}
+              onKeyDown={enterPriority}
               value={value}
             />
             <Button

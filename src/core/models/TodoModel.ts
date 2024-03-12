@@ -4,9 +4,9 @@ export interface ITodo {
   readonly id: string;
   readonly leftTime: number;
   title: string;
-  descr?: string;
-  priority?: number;
-  hashtags?: string[];
+  descr: string;
+  priority: number;
+  hashtags: string[];
 }
 
 type TodoModelConstructor = {
