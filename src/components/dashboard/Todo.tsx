@@ -21,9 +21,7 @@ const priorities: Priority[] = [
 ];
 
 const Todo: FC<TodoProps> = ({ todo, openTodoPopup }) => {
-  const flagClass = priorities.find(
-    (priority) => priority.value === todo.priority
-  )!.iconColor;
+  const priority = priorities.find((p) => p.value === todo.priority);
 
   return (
     <div
@@ -32,7 +30,7 @@ const Todo: FC<TodoProps> = ({ todo, openTodoPopup }) => {
     >
       <div className="flex items-center pr-5">
         <Svg
-          className={`mr-2 min-w-[16px] ${flagClass}`}
+          className={`mr-2 min-w-[16px] ${priority!.iconColor}`}
           width={16}
           height={16}
           iconId="icon-flag"

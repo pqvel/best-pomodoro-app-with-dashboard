@@ -12,6 +12,7 @@ import {
   changeSectionTitle,
   deleteSection,
 } from "../../core/redux/slices/dashboardSlice";
+import { ITodo } from "../../core/models/TodoModel";
 
 type SectionProps = {
   section: SectionType;
@@ -41,14 +42,8 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
     );
   };
 
-  const openTodoPopup = (todoId: string) => {
-    dispatch(
-      setTodoPopupActiveTodo({
-        sectionId: section.id,
-        dashboardId: dashboardId,
-        todoId: todoId,
-      })
-    );
+  const openTodoPopup = (todo: ITodo) => {
+    dispatch(setTodoPopupActiveTodo(todo));
   };
 
   return (
@@ -78,7 +73,7 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         {section.todos.map((todo) => (
           <Todo
             todo={todo}
-            openTodoPopup={() => openTodoPopup(todo.id)}
+            openTodoPopup={() => openTodoPopup(todo)}
             key={todo.id}
           />
         ))}
