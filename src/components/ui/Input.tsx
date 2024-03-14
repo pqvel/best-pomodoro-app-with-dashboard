@@ -6,7 +6,7 @@ interface InputProps {
   placeholder?: string;
   ref?: LegacyRef<HTMLInputElement>;
   value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface TextInputProps extends InputProps {}

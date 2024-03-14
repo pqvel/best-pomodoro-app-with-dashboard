@@ -1,27 +1,38 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type PopupState = {
-  isOpenTodoPopup: boolean;
-  todoPopupSectionId: string;
+  addTodoPopupSectionId: string;
+  todoPupupActiveTodo: TodoFindData;
+};
+
+type TodoFindData = {
+  dashboardId: string;
+  sectionId: string;
+  todoId: string;
 };
 
 const initialState: PopupState = {
-  isOpenTodoPopup: false,
-  todoPopupSectionId: "",
+  addTodoPopupSectionId: "",
+  todoPupupActiveTodo: {
+    sectionId: "",
+    dashboardId: "",
+    todoId: "",
+  },
 };
 
 export const popupSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    // setTodoPopupActiveTodo: (state, action: PayloadAction<boolean>) => {
-    //   state.isOpenTodoPopup = action.payload;
-    // },
     setAddTodoPopupSectionId: (state, action: PayloadAction<string>) => {
-      state.todoPopupSectionId = action.payload;
+      state.addTodoPopupSectionId = action.payload;
+    },
+    setTodoPopupActiveTodo: (state, action: PayloadAction<TodoFindData>) => {
+      state.todoPupupActiveTodo = action.payload;
     },
   },
 });
 
-export const { setAddTodoPopupSectionId } = popupSlice.actions;
+export const { setAddTodoPopupSectionId, setTodoPopupActiveTodo } =
+  popupSlice.actions;
 export default popupSlice.reducer;

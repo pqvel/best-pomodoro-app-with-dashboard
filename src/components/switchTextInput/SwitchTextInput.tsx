@@ -1,56 +1,61 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState, KeyboardEvent } from "react";
 import { Input, Button } from "../ui";
 import { useInput } from "../../core/hooks/useInput";
 
 type Props = {
   children: string | JSX.Element | JSX.Element[];
-  editTextClass: string;
-  value: string;
+  className?: string;
+  currentValue?: string;
   editHandler: (value: string) => void;
 };
-// нужно хранить пред состояние текста
+
+const enum Views {
+  Editing = "EDITING",
+  IDLE = "IDLE",
+}
+
 const SwitchTextInput: FC<Props> = ({
   children,
-  editTextClass,
-  // value as defaultValue,
+  currentValue = "",
+  className = "",
   editHandler,
 }) => {
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-
-  const { value, changeHandler } = useInput();
+  const [currentView, setCurrentView] = useState<Views>(Views.IDLE);
+  const { value, changeHandler } = useInput(currentValue);
   const editButton = useRef<HTMLButtonElement>(null);
 
-  const toggleEditText = () => {
-    setIsEdit((isEdit) => !isEdit);
-  };
-
   const confirmChanges = () => {
-    // const value = editInput.current!.value;
+    if (value.length === 0) return;
     editHandler(value);
-    toggleEditText();
+    setCurrentView(Views.IDLE);
   };
 
-  if (isEdit) {
+  const onEnterEditHandler = (e: KeyboardEvent) => {
+    if (e.key === "Enter") setCurrentView(Views.Editing);
+  };
+
+  if (currentView === Views.Editing) {
     return (
-      <div>
+      <div className={className}>
         <Input.TextInput
-          placeholder=""
+          className="h-9"
           value={value}
           onChange={changeHandler}
         />
-        <div className="flex">
+        <div className="flex mt-2">
           <Button
             disabled={!value}
             ref={editButton}
             className="py-1 px-2 mr-2"
             theme="black"
+            onClick={confirmChanges}
           >
             Сохранить
           </Button>
           <Button
             className="py-1 px-2"
             theme="transparent"
-            onClick={toggleEditText}
+            onClick={() => setCurrentView(Views.IDLE)}
           >
             Отмена
           </Button>
@@ -59,7 +64,18 @@ const SwitchTextInput: FC<Props> = ({
     );
   }
 
-  return <div onClick={toggleEditText}>{children}</div>;
+  return (
+    <div
+      className={className}
+      aria-label={`Редактировать название ${currentValue}`}
+      tabIndex={0}
+      role="button"
+      onClick={() => setCurrentView(Views.Editing)}
+      onKeyDown={onEnterEditHandler}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default SwitchTextInput;

@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { ITodo } from "../../../core/models/TodoModel";
-import { Svg, Input } from "../../ui";
+import { ITodo } from "../../core/models/TodoModel";
+import { Svg, Input } from "../ui";
 
 type TodoProps = {
   todo: ITodo;
-  editHandler?: () => void;
+  openTodoPopup: () => void;
 };
 
 type Priority = {
@@ -20,13 +20,16 @@ const priorities: Priority[] = [
   { title: "Приоритет 4", value: 4, iconColor: "" },
 ];
 
-const Todo: FC<TodoProps> = ({ todo, editHandler }) => {
+const Todo: FC<TodoProps> = ({ todo, openTodoPopup }) => {
   const flagClass = priorities.find(
     (priority) => priority.value === todo.priority
   )!.iconColor;
 
   return (
-    <div className="relative flex flex-col cursor-pointer bg-white p-3 rounded-md border border-gray-300 max-w-72 w-full">
+    <div
+      className="relative flex flex-col cursor-pointer bg-white p-3 rounded-md border border-gray-300 max-w-72 w-full"
+      onClick={openTodoPopup}
+    >
       <div className="flex items-center pr-5">
         <Svg
           className={`mr-2 min-w-[16px] ${flagClass}`}

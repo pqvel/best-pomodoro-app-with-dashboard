@@ -11,13 +11,13 @@ type AddTodoProps = {
 
 const AddTodo: FC<AddTodoProps> = ({ dashboardId, sectionId }) => {
   const dispatch = useAppDispatch();
-  const { todoPopupSectionId } = useAppSelector((state) => state.popup);
+  const { addTodoPopupSectionId } = useAppSelector((state) => state.popup);
 
   const openTodoForm = () => {
     dispatch(setAddTodoPopupSectionId(sectionId));
   };
 
-  if (sectionId !== todoPopupSectionId) {
+  if (sectionId !== addTodoPopupSectionId) {
     return (
       <Button className="px-2 py-1" theme="transparent" onClick={openTodoForm}>
         Добавить задачу
