@@ -1,14 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITodo } from "../../models/TodoModel";
 
-export type PopupState = {
+type TodoPupupActiveTodo = {
+  todoId: string;
+  sectionId: string;
+  dashboardId: string;
+};
+
+type PopupState = {
   addTodoPopupSectionId: string;
-  todoPupupActiveTodo: ITodo | null;
+  todoPupupActiveTodo: TodoPupupActiveTodo;
 };
 
 const initialState: PopupState = {
   addTodoPopupSectionId: "",
-  todoPupupActiveTodo: null,
+  todoPupupActiveTodo: {
+    todoId: "",
+    dashboardId: "",
+    sectionId: "",
+  },
 };
 
 export const popupSlice = createSlice({
@@ -18,7 +27,10 @@ export const popupSlice = createSlice({
     setAddTodoPopupSectionId: (state, action: PayloadAction<string>) => {
       state.addTodoPopupSectionId = action.payload;
     },
-    setTodoPopupActiveTodo: (state, action: PayloadAction<ITodo | null>) => {
+    setTodoPopupActiveTodo: (
+      state,
+      action: PayloadAction<TodoPupupActiveTodo>
+    ) => {
       state.todoPupupActiveTodo = action.payload;
     },
   },

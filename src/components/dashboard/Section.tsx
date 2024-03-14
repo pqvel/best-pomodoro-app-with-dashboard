@@ -43,7 +43,13 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   };
 
   const openTodoPopup = (todo: ITodo) => {
-    dispatch(setTodoPopupActiveTodo(todo));
+    dispatch(
+      setTodoPopupActiveTodo({
+        dashboardId,
+        sectionId: section.id,
+        todoId: todo.id,
+      })
+    );
   };
 
   return (
