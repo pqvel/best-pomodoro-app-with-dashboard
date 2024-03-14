@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from "react";
+import { FC, MouseEvent, useState } from "react";
 import { Svg, Button, Tooltip } from "../ui";
 import SwitchTextInput from "../switchTextInput/SwitchTextInput";
 import Todo from "./Todo";
@@ -21,11 +21,14 @@ type SectionProps = {
 
 const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   const dispatch = useAppDispatch();
-  const { togglePopup, isOpen } = usePopup();
+  const confirmPopup = usePopup();
+  //
+  const [activeTodo, setActiveTodo] = useState();
+  const todoPopup = usePopup();
 
   const openDeleteSectionPopup = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    togglePopup();
+    confirmPopup.togglePopup();
   };
 
   const deleteSectionHandler = () => {
@@ -85,13 +88,13 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
         ))}
         <AddTodo dashboardId={dashboardId} sectionId={section.id} />
       </div>
-      {isOpen && (
+      {confirmPopup.isOpen && (
         <ConfirmPopup
           title="Вы уверены?"
           descr="Все задачи из текущей секции будут удалены без возможности восстановления."
           iconId="icon-alert"
           confirmHandler={deleteSectionHandler}
-          closeHandler={togglePopup}
+          closeHandler={confirmPopup.togglePopup}
         />
       )}
     </>
