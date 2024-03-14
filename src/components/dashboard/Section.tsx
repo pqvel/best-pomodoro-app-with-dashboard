@@ -1,5 +1,5 @@
 import { FC, MouseEvent } from "react";
-import { Svg, Button } from "../ui";
+import { Svg, Button, Tooltip } from "../ui";
 import SwitchTextInput from "../switchTextInput/SwitchTextInput";
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
@@ -60,11 +60,14 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
           editHandler={editSectionTitle}
         >
           <div className="flex justify-between items-center">
-            <h3 className="rounded-4 px-2 py-1 bg-slate-300 bg-opacity-60 rounded-sm font-semibold text-lg truncate mr-2">
-              {section.title}
-            </h3>
+            <Tooltip className=" max-w-[240px]" message={section.title}>
+              <h3 className="rounded-4 px-2 py-1 bg-slate-300 bg-opacity-60 rounded-sm font-semibold text-lg truncate">
+                {section.title}
+              </h3>
+            </Tooltip>
+
             <Button
-              className="p-1"
+              className="p-1 ml-2 shrink-0"
               theme="transparent"
               onClick={openDeleteSectionPopup}
             >

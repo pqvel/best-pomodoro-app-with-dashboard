@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Tooltip } from "../ui";
 import SwitchTextInput from "../switchTextInput/SwitchTextInput";
 import Section from "./Section";
 import AddSectionForm from "../forms/AddSectionForm";
@@ -25,9 +26,11 @@ const Dashboard: FC = () => {
         currentValue={dashboard.title}
         editHandler={editHandler}
       >
-        <h2 className="rounded-4 px-2 py-1 bg-slate-300 bg-opacity-60 rounded-sm text-2xl font-bold truncate">
-          {dashboard.title}
-        </h2>
+        <Tooltip message={dashboard.title}>
+          <h2 className="rounded-4 px-2 py-1 bg-slate-300 bg-opacity-60 rounded-sm text-2xl font-bold truncate">
+            {dashboard.title}
+          </h2>
+        </Tooltip>
       </SwitchTextInput>
       <div className="flex flex-row">
         {dashboard.sections.map((section) => (
