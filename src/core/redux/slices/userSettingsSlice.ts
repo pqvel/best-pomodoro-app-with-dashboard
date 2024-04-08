@@ -9,20 +9,21 @@ type CurrentTodoPomodoro = {
 
 export interface Settings {
   countPomodors: number;
-  currentPomodoro: number;
   pomodoroTime: number;
   breakTime: number;
   bigBreakTime: number;
   // нужно перенсти от сюда в user
   currentTodoPomodoro: CurrentTodoPomodoro;
+  currentPomodoro: number;
 }
 
 const initialState: Settings = {
   countPomodors: 4,
-  currentPomodoro: 1,
   pomodoroTime: 25 * 60 * 1000,
   breakTime: 5 * 60 * 1000,
   bigBreakTime: 20 * 60 * 1000,
+
+  currentPomodoro: 1,
   currentTodoPomodoro: {
     dashboardId: "",
     sectionId: "",
