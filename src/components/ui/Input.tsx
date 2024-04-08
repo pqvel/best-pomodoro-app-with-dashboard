@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, LegacyRef } from "react";
+import { ChangeEvent, MouseEvent, FC, LegacyRef } from "react";
 import { Svg } from "./index";
 
 interface InputProps {
@@ -6,7 +6,9 @@ interface InputProps {
   placeholder?: string;
   ref?: LegacyRef<HTMLInputElement>;
   value?: string;
+  maxLength?: number;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: MouseEvent<HTMLInputElement>) => void;
 }
 
 interface TextInputProps extends InputProps {}
@@ -16,6 +18,7 @@ const TextInput: FC<TextInputProps> = ({
   placeholder = "",
   ref = null,
   value,
+  maxLength,
   onChange,
 }) => (
   <input
@@ -24,6 +27,7 @@ const TextInput: FC<TextInputProps> = ({
     ref={ref}
     value={value}
     onChange={onChange}
+    maxLength={maxLength}
   />
 );
 
@@ -37,8 +41,9 @@ const CheckboxInput: FC<CheckboxInputProps> = ({
   ref = null,
   value = "",
   onChange,
+  onClick,
 }) => (
-  <div className={`inline-flex items-center ${className}`}>
+  <div onClick={onClick} className={`inline-flex items-center ${className}`}>
     <label className="relative flex items-centerrounded-full cursor-pointer">
       <input
         type="checkbox"

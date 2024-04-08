@@ -50,7 +50,10 @@ const Todo: FC<TodoProps> = ({ todo, openTodoPopup }) => {
           ))}
         </div>
       )}
-      <Input.CheckboxInput className=" absolute right-3 top-3.5" />
+      <Input.CheckboxInput
+        onClick={(e) => e.stopPropagation()}
+        className=" absolute right-3 top-3.5"
+      />
     </div>
   );
 };

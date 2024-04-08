@@ -7,13 +7,11 @@ import { useAppSelector } from "../../core/redux/app/hooks";
 import { findTodo } from "../../core/utils/find";
 
 const TimerPage: FC = () => {
-  const { dashboardId, sectionId, todoId } = useAppSelector(
-    (state) => state.popup.todoPupupActiveTodo
-  );
-
-  const todo = useAppSelector((state) =>
-    findTodo(state.dashboard, dashboardId, sectionId, todoId)
-  );
+  const todo = useAppSelector((state) => {
+    const { dashboardId, sectionId, todoId } =
+      state.settings.currentTodoPomodoro;
+    return findTodo(state.dashboard, dashboardId, sectionId, todoId);
+  });
 
   return (
     <MainTemplate>

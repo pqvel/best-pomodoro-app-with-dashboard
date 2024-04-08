@@ -31,6 +31,7 @@ export const popupSlice = createSlice({
       state,
       action: PayloadAction<TodoPupupActiveTodo>
     ) => {
+      console.log(action.payload);
       state.todoPupupActiveTodo = action.payload;
     },
   },

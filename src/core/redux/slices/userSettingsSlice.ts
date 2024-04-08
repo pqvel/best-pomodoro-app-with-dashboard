@@ -1,13 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 
+type CurrentTodoPomodoro = {
+  dashboardId: string;
+  sectionId: string;
+  todoId: string;
+};
+
 export interface Settings {
   countPomodors: number;
   currentPomodoro: number;
   pomodoroTime: number;
   breakTime: number;
   bigBreakTime: number;
-  currentTodoId: string;
+  // нужно перенсти от сюда в user
+  currentTodoPomodoro: CurrentTodoPomodoro;
 }
 
 const initialState: Settings = {
@@ -16,7 +23,11 @@ const initialState: Settings = {
   pomodoroTime: 25 * 60 * 1000,
   breakTime: 5 * 60 * 1000,
   bigBreakTime: 20 * 60 * 1000,
-  currentTodoId: "",
+  currentTodoPomodoro: {
+    dashboardId: "",
+    sectionId: "",
+    todoId: "",
+  },
 };
 
 export const userSettingsSlice = createSlice({
@@ -26,12 +37,16 @@ export const userSettingsSlice = createSlice({
     setNextPomodoro: (state, action: PayloadAction<number>) => {
       state.currentPomodoro = action.payload;
     },
-    setCurrentTodoId: (state, action: PayloadAction<string>) => {
-      state.currentTodoId = action.payload;
+    setCurrentTodoPomodoro: (
+      state,
+      action: PayloadAction<CurrentTodoPomodoro>
+    ) => {
+      state.currentTodoPomodoro = action.payload;
     },
   },
 });
 
-export const { setNextPomodoro, setCurrentTodoId } = userSettingsSlice.actions;
+export const { setNextPomodoro, setCurrentTodoPomodoro } =
+  userSettingsSlice.actions;
 export const userSettingsSelector = (state: RootState) => state.settings;
 export default userSettingsSlice.reducer;
