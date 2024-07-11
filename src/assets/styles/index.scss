@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // @import './global/themes';
 @import "./global/colors";
 
@@ -39,6 +43,18 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#progressInput {
+  margin: 20px auto;
+  width: 30%;
+}
+
+.circle-background,
+.circle-progress {
+  fill: none;
+}
+
+.circle-progress {
+  // stroke: red;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

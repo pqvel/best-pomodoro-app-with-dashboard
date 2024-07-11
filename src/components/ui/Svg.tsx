@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-const Svg: FC<Props> = ({ width, height, iconId, className }) => (
+const Svg: FC<Props> = ({ width, height, iconId, className = "" }) => (
   <svg className={className} width={width} height={height}>
     <use href={`${Icons}#${iconId}`}></use>
   </svg>

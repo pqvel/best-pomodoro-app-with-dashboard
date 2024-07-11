@@ -1,11 +1,12 @@
 import { FC } from "react";
 import MainTemplate from "../templates/MainTemplate";
+import { Typography } from "../ui";
 
 const InfoPage: FC = () => (
   <MainTemplate>
-    <section className=" flex flex-col m-5">
-      <h1 className="text-2xl font-bold mb-4">Техника Pomodoro</h1>
-      <p className="mb-4">
+    <section className="flex flex-col m-5 max-w-5xl mx-auto bg-white rounded-lg p-5">
+      <Typography.H1>Техника Pomodoro</Typography.H1>
+      <Typography.P>
         Десятки задач, один исполнитель и восьмичасовой рабочий день. Как всё
         успеть, не сойти с ума и ничего не забыть? В Украине наверняка хорошо
         знают ответ на этот вопрос: по данным Google Trends за - год мы искали
@@ -14,11 +15,11 @@ const InfoPage: FC = () => (
         Worksection попробовал разобраться, как быть успешным с помощью
         кухонного таймера, кому Pomodoro вряд ли понравится, и что делать, если
         в офисе вас отвлекают от «помидорного» графика.
-      </p>
-      <h2 className="text-xl font-semibold mb-4">
+      </Typography.P>
+      <Typography.H2>
         Что такое техника планирования Помодоро и зачем она нужна?
-      </h2>
-      <p className="mb-4">
+      </Typography.H2>
+      <Typography.P>
         Сейчас Франческо Чирилло — владелец Cirillo Consulting,
         сертифицированного проводника в систему Помодоро. А вот в 80-ые он был
         студентом и хотел тратить минимум времени на учебу. Франческо решил
@@ -30,63 +31,61 @@ const InfoPage: FC = () => (
         тайм-менеджмента Pomodoro. Свое название техника получила от
         «помидорного» таймера: «pomodori» в переводе с итальянского означает
         «томат».
-      </p>
-      <p className="mb-4">
+      </Typography.P>
+      <Typography.P>
         Со временем Франческо развил Pomodoro до полноценной системы: например,
         отрезки времени работы увеличились до 25 минут. Подробнее о современной
         версии техники мы написали в разделах «6 правил Pomodoro» и «Как оценить
         эффективность работы по Pomodoro?».
-      </p>
-      <h2 className="text-xl font-semibold mb-4">
+      </Typography.P>
+      <Typography.H2>
         В простом варианте техника Pomodoro работает так:
-      </h2>
-      <ol className="pl-5 flex flex-col mb-4">
-        <li className="list-decimal mb-3">
+      </Typography.H2>
+      <Typography.Ol>
+        <Typography.Li>
           Составьте список задач, которые нужно сделать в ближайшее время
           (например, неделю). Такие задачи называются активными.
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           Из списка активных задач выберите те, которые хотите сделать сегодня.
           Добавьте их в список задач на день.
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           Расставьте задачи на день от наиболее до наименее приоритетной.
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           Включите таймер на 25 минут. Начинайте работу!
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           Прошло 25 минут - сделайте перерыв в 5 - 10 минут. Спустя 4 «помидора»
           сделайте полноценный перерыв в 15 - 20 минут.
-        </li>
-        <li className="list-decimal">
+        </Typography.Li>
+        <Typography.Li>
           Повторяйте пункты 4 - 6, пока не закроете все задачи из списка на
           день. Каждый потраченный на задачу «помидор» отмечайте напротив неё
           крестиком. Закрытые задачи вычеркивайте.
-        </li>
-      </ol>
-      <p className="mb-4">
+        </Typography.Li>
+      </Typography.Ol>
+      <Typography.P>
         Отлично, вы освоили технику Pomodoro в самом начале статьи! Если хотите
         узнать нюансы использования техники, недостатках и особенностях
         внедрения в офисную работу - читайте дальше.
-      </p>
-      <h2 className="text-xl font-semibold mb-4">
-        Чем хороша техника Pomodoro?
-      </h2>
-      <ol className="pl-5 flex flex-col mb-4">
-        <li className="list-decimal mb-3">
+      </Typography.P>
+      <Typography.H2>Чем хороша техника Pomodoro?</Typography.H2>
+      <Typography.Ol>
+        <Typography.Li>
           <b>Вы работаете над конкретной задачей.</b>&nbsp;Меньше риска
           отвлечься и попасть в режим многозадачности, потому что вы знаете -
           через 25 минут будет перерыв.
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           <b>Вы успеваете сделать больше за меньшее время.</b>&nbsp;Принцип в
           Worksection: «Делай больше, делая меньше». А в Pomodoro этот принцип
           выглядит немного по-другому: «Делай больше за меньшее время». Вы не
           отвлекаетесь на другие задачи и соцсети, а значит не перегружаете мозг
           лишней информацией
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           <b>
             Вы можете проанализировать, насколько эффективно выполнили задачу.
           </b>
@@ -95,27 +94,27 @@ const InfoPage: FC = () => (
           примеру, одна из задач могла быть слишком большой, и вы потратили на
           неё весь день. Такую большую задачу лучше разделить на несколько
           мелких (об этом написали в разделе «Правила и принципы техники»).
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           <b>
             Вы видите прямую связь между целью и задачами для её достижения.
           </b>
           &nbsp;Цель достигается небольшими шагами (задачами), и вы понимаете,
           на каком этапе пути находитесь - по количеству зачеркнутых за день
           задач.
-        </li>
-        <li className="list-decimal mb-3">
+        </Typography.Li>
+        <Typography.Li>
           <b>Вы можете настроить технику под свой ритм и потребности.</b>
           &nbsp;Например, увеличить продолжительность «помидора» или перерыва.
           Также можно переставить большой перерыв на время обеда, если
           используете Pomodoro в офисе.
-        </li>
-        <li className="list-decimal">
+        </Typography.Li>
+        <Typography.Li>
           <b>Вы учитесь грамотно планировать задачи на день.</b>&nbsp;При
           планировании дня с Помодоро вы выбираете наиболее приоритетные задачи
           и прогнозируете, сколько времени займет каждая из них.
-        </li>
-      </ol>
+        </Typography.Li>
+      </Typography.Ol>
     </section>
   </MainTemplate>
 );

@@ -4,6 +4,7 @@ import TimerPage from "../pages/TimerPage";
 import TodosPage from "../pages/Todos";
 import StatsPage from "../pages/Stats";
 import InfoPage from "../pages/InfoPage";
+import AccountPage from "../pages/AccountPage";
 
 const App: FC = () => {
   useEffect(() => {
@@ -12,10 +13,11 @@ const App: FC = () => {
 
   return (
     <Routes>
-      <Route path="/timer" element={<TimerPage />} />
+      <Route path="/" element={<TimerPage />} />
       <Route path="/todos" element={<TodosPage />} />
       <Route path="/stats" element={<StatsPage />} />
       <Route path="/info" element={<InfoPage />} />
+      <Route path="/account" element={<AccountPage />} />
     </Routes>
   );
 };

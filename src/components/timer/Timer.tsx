@@ -5,6 +5,8 @@ import { useTimer } from "../../core/hooks/useTimer";
 import { msToTime } from "../../core/utils/msToTime";
 import { setNextPomodoro } from "../../core/redux/slices/userSettingsSlice";
 import Button from "../ui/Button";
+import TimerDisplay from "./TimerDisplay";
+import clsx from "clsx";
 
 const enum TimerStatus {
   Timer = "TIMER",
@@ -12,7 +14,7 @@ const enum TimerStatus {
   Idle = "IDLE",
 }
 
-const enum PomodoroStatus {
+export const enum PomodoroStatus {
   Work = "Work",
   Break = "BREAK",
   BigBreak = "BIG_BREAKE",
@@ -75,7 +77,10 @@ const Timer: FC = () => {
     pomodoroStatus === PomodoroStatus.Work ? "bg-red-700" : "bg-green-700";
   return (
     <div
-      className={`flex flex-col gap-5 items-center justify-center rounded-lg p-5 shadow-md shadow-gray ${bgColorClass}`}
+      className={clsx(
+        "flex flex-col gap-5 items-center justify-center rounded-lg p-20 shadow-md shadow-gray",
+        bgColorClass
+      )}
     >
       <TimerDisplay
         time={leftTime}
@@ -88,38 +93,6 @@ const Timer: FC = () => {
         pauseHandler={handlePause}
         stopHandler={handleStop}
       />
-    </div>
-  );
-};
-
-type TimerDisplayProps = {
-  time: number;
-  settings: Settings;
-  pomodoroStatus: PomodoroStatus;
-};
-
-const TimerDisplay: FC<TimerDisplayProps> = ({
-  time,
-  settings,
-  pomodoroStatus,
-}) => {
-  const { seconds, minutes } = msToTime(time);
-  const countPomodorsToBigBreak =
-    settings.countPomodors + 1 - settings.currentPomodoro;
-
-  return (
-    <div className="flex flex-col gap-4">
-      <div className="text-9xl text-white">
-        <span>{minutes}</span>:<span>{seconds}</span>
-      </div>
-
-      <div className="text-lg text-white font-semibold">
-        {pomodoroStatus !== PomodoroStatus.BigBreak ? (
-          <>До большого перерыва {countPomodorsToBigBreak} помидора</>
-        ) : (
-          <>Большой перерыв</>
-        )}
-      </div>
     </div>
   );
 };
