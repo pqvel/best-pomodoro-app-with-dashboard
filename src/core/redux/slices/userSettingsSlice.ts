@@ -64,7 +64,7 @@ export const userSettingsSlice = createSlice({
       state.pomodoroTime = action.payload;
     },
     setBreakTime: (state, action: PayloadAction<number>) => {
-      state.pomodoroTime = action.payload;
+      state.breakTime = action.payload;
     },
     setBigBreakTime: (state, action: PayloadAction<number>) => {
       state.bigBreakTime = action.payload;

@@ -90,7 +90,7 @@ const TodoPopupButtons: FC<TodoPopupButtonsProps> = ({
     <div className="flex justify-end">
       <Link
         className="flex items-center justify-center cursor-pointer rounded bg-slate-950 text-white hover:bg-black px-4 py-1"
-        to="/timer"
+        to="/"
         onClick={setCurrentTodo}
       >
         Начать

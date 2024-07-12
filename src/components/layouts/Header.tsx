@@ -9,12 +9,7 @@ const Header: FC = () => {
         className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 hover:bg-white"
         to="/account"
       >
-        <Svg
-          className=" text-white"
-          width={24}
-          height={24}
-          iconId="icon-user"
-        />
+        <Svg width={24} height={24} iconId="icon-user" />
       </Link>
     </header>
   );

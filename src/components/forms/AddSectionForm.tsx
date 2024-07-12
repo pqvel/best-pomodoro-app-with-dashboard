@@ -15,7 +15,7 @@ const AddSectionForm: FC<Props> = ({ createSection }) => {
   };
 
   return (
-    <form className="flex flex-col w-72">
+    <form className="flex flex-col w-72 min-w-72">
       <Input.TextInput
         className="h-9"
         placeholder="Название раздела"

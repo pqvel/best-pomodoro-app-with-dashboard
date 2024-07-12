@@ -1,80 +1,121 @@
-import { FC } from "react";
+import { ChangeEvent, FC, useMemo } from "react";
 import { Block } from "../ui/Wrappers";
 import { Typography } from "../ui";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import {
+  setBigBreakTime,
+  setBreakTime,
   setCountPomodors,
   setPomodoroTime,
 } from "../../core/redux/slices/userSettingsSlice";
+import { minToMs, msToMin } from "../../core/utils/format/formatTime";
+import { getPluralText } from "../../core/utils/getPluralText";
 
 const PomodoroSettings: FC = () => {
   const { countPomodors, pomodoroTime, breakTime, bigBreakTime } =
     useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
 
+  const rangeHandler = (action: Function, value: number) => {
+    dispatch(action(minToMs(value)));
+  };
+
+  const getPluralMinutes = (minutes: number) => {
+    return getPluralText(minutes, [
+      `${minutes} минута`,
+      `${minutes} минуты`,
+      `${minutes} минут`,
+    ]);
+  };
+
+  const pomodoroTimeMinutes = useMemo(() => {
+    return msToMin(pomodoroTime);
+  }, [pomodoroTime]);
+
+  const breakTimeMinutes = useMemo(() => {
+    return msToMin(breakTime);
+  }, [breakTime]);
+
+  const bigBreakTimeMinutes = useMemo(() => {
+    return msToMin(bigBreakTime);
+  }, [bigBreakTime]);
+
   return (
     <Block className="mb-5">
       <Typography.H2>Настройки Помодоро</Typography.H2>
-      <div className="mb-4">
-        <Typography.H3>Количество помидоров до большого перерыва</Typography.H3>
-        <input
-          type="number"
-          value={countPomodors}
-          onChange={() => dispatch(setCountPomodors(countPomodors))}
-          className="block p-2 w-full text-sm border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
+      <Setting
+        title="Количество сессий до большого перерыва"
+        value={countPomodors}
+        changeHandler={(e) => dispatch(setCountPomodors(+e.target.value))}
+        min={1}
+        max={10}
+        pluralText={getPluralText(countPomodors, [
+          `${countPomodors} сессия`,
+          `${countPomodors} сессии`,
+          `${countPomodors} сессий`,
+        ])}
+      />
+      <Setting
+        title="Время работы"
+        value={pomodoroTimeMinutes}
+        changeHandler={(e) => rangeHandler(setPomodoroTime, +e.target.value)}
+        min={5}
+        max={60}
+        pluralText={getPluralMinutes(pomodoroTimeMinutes)}
+      />
+      <Setting
+        title="Время перерыва"
+        value={breakTimeMinutes}
+        changeHandler={(e) => rangeHandler(setBreakTime, +e.target.value)}
+        min={1}
+        max={30}
+        pluralText={getPluralMinutes(breakTimeMinutes)}
+      />
 
-      <div className="mb-4">
-        <Typography.H3>Время Помодоро (минуты)</Typography.H3>
-        <input
-          type="range"
-          value={pomodoroTime}
-          onChange={() => dispatch(setPomodoroTime(pomodoroTime))}
-          min="1"
-          max="60"
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-        />
-        <div className="text-right text-sm font-medium text-gray-700">
-          {pomodoroTime} минут
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <Typography.H3>Время Перерыва (минуты)</Typography.H3>
-
-        <input
-          type="range"
-          value={breakTime}
-          // onChange={handleChange(setBreakTime)}
-          min="1"
-          max="30"
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-        />
-        <div className="text-right text-sm font-medium text-gray-700">
-          {/* {breakTime}  */}
-          минут
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <Typography.H3>Время Большого Перерыва (минуты)</Typography.H3>
-
-        <input
-          type="range"
-          value={bigBreakTime}
-          // onChange={handleChange(setBigBreakTime)}
-          min="5"
-          max="60"
-          step="5"
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-        />
-        <div className="text-right text-sm font-medium text-gray-700">
-          {/* {bigBreakTime} минут */} минут
-        </div>
-      </div>
+      <Setting
+        title="Время большого перерыва"
+        value={bigBreakTimeMinutes}
+        changeHandler={(e) => rangeHandler(setBigBreakTime, +e.target.value)}
+        min={5}
+        max={60}
+        pluralText={getPluralMinutes(bigBreakTimeMinutes)}
+      />
     </Block>
   );
 };
+
+type SettingProps = {
+  value: number;
+  pluralText: string;
+  title: string;
+  min: number;
+  max: number;
+  changeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Setting: FC<SettingProps> = ({
+  value,
+  pluralText,
+  title,
+  min,
+  max,
+  changeHandler,
+}) => (
+  <div className="mb-4">
+    <Typography.H3>{title}</Typography.H3>
+
+    <input
+      type="range"
+      value={value}
+      onChange={changeHandler}
+      min={min}
+      max={max}
+      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+    />
+    <div className="text-right text-sm font-medium text-gray-700">
+      {pluralText}
+    </div>
+  </div>
+);
 
 export default PomodoroSettings;

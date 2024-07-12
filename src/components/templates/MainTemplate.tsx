@@ -18,7 +18,7 @@ const MainTemplate: FC<Props> = ({ children }) => {
         <Aside />
         <main
           className={clsx(
-            "relative w-full min-h-full overflow-auto scroll p-5 bg-center bg-cover",
+            "scroll relative w-full min-h-full overflow-auto p-5 bg-center bg-cover",
             image.className
           )}
         >

@@ -6,13 +6,13 @@
  * @todo не используется
  * @returns {string} - Текстовая форма в зависимости от количества товаров.
  * @example
- * declensionNumber(5, ['товар', 'товара', 'товаров']); -> 5 товаров
- * declensionNumber(1, ['товар', 'товара', 'товаров']); -> 1 товар
- * declensionNumber(12, ['товар', 'товара', 'товаров']); -> 1 товаров
- * declensionNumber(22, ['товар', 'товара', 'товаров']); -> 1 товара
+ * getPluralText(5, ['товар', 'товара', 'товаров']); -> 5 товаров
+ * getPluralText(1, ['товар', 'товара', 'товаров']); -> 1 товар
+ * getPluralText(12, ['товар', 'товара', 'товаров']); -> 1 товаров
+ * getPluralText(22, ['товар', 'товара', 'товаров']); -> 1 товара
  *
  */
-export const getPluralText = (count = 0, words = []) => {
+export const getPluralText = (count: number, words: string[]) => {
   if (count === 0) {
     return words[2]; //  "Найдено 0 товаров";
   }

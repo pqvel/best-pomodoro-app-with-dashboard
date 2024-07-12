@@ -20,7 +20,7 @@ const Dashboard: FC = () => {
   };
 
   return (
-    <section className="flex flex-col bg-gray-400 bg-opacity-10 h-full p-5 m-5 rounded-lg w-full cursor-grab">
+    <section className=" w-fit">
       <SwitchTextInput
         className="mb-4 w-72"
         currentValue={dashboard.title}

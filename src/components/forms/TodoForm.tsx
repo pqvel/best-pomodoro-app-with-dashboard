@@ -3,10 +3,10 @@ import { Button, Svg } from "../ui";
 import Priorities from "../todoSettings/Priorities";
 import Hashtags from "../todoSettings/Hashtags";
 import { useAppDispatch } from "../../core/redux/app/hooks";
-import { setScrollHeight } from "../../core/utils/setScrollHeight";
+// import { setHeight } from "../../core/utils/setScrollHeight";
 import { createTodo } from "../../core/redux/slices/dashboardSlice";
 import { TodoModel } from "../../core/models/TodoModel";
-
+import { setScrollHeight } from "../../core/utils/setScrollHeight";
 type TodoFormProps = {
   dashboardId: string;
   sectionId: string;
