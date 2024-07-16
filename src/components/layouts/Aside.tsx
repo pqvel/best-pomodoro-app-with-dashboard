@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { useResizeElement } from "../../core/hooks/useResizeElement";
+// import { useResizeElement } from "../../core/hooks/useResizeElement";
 import Svg from "../ui/Svg";
 /**
  * @todo
@@ -37,20 +37,20 @@ const navItems: INavItem[] = [
 ];
 
 const Aside: FC = () => {
-  const {
-    resizeElement,
-    initResizeElement,
-    mouseDownHandler,
-    destroyResizeElement,
-  } = useResizeElement();
+  // const {
+  //   // resizeElement,
+  //   initResizeElement,
+  //   mouseDownHandler,
+  //   destroyResizeElement,
+  // } = useResizeElement();
 
-  useEffect(() => {
-    initResizeElement();
-    return destroyResizeElement();
-  }, []);
+  // useEffect(() => {
+  //   initResizeElement();
+  //   return destroyResizeElement();
+  // }, []);
   return (
     <aside
-      ref={resizeElement}
+      // ref={resizeElement}
       className=" bg-slate-950 w-80 relative p-5 flex flex-col h-full max-w-[320px] min-w-[94px]"
     >
       <nav className="flex flex-col gap-4">
@@ -73,7 +73,7 @@ const Aside: FC = () => {
       </nav>
       <div
         className=" absolute right-0 top-0 h-full w-2 bg-white opacity-0 hover:opacity-50"
-        onMouseDown={mouseDownHandler}
+        // onMouseDown={mouseDownHandler}
       ></div>
     </aside>
   );

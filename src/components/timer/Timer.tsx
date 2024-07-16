@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
-import { Settings } from "../../core/redux/slices/userSettingsSlice";
+// import { Settings } from "../../core/redux/slices/userSettingsSlice";
 import { useAppDispatch, useAppSelector } from "../../core/redux/app/hooks";
 import { useTimer } from "../../core/hooks/useTimer";
-import { msToTime } from "../../core/utils/msToTime";
+// import { msToTime } from "../../core/utils/msToTime";
 import { setNextPomodoro } from "../../core/redux/slices/userSettingsSlice";
 import Button from "../ui/Button";
 import TimerDisplay from "./TimerDisplay";

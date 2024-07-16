@@ -9,7 +9,7 @@ type HashtagsProps = {
 
 const Hashtags: FC<HashtagsProps> = ({ hashtags, addHashtag }) => {
   const [value, setValue] = useState<string>("");
-  const { isOpen, openSelect, closeSelect, toggleSelect } = useSelect();
+  const { isOpen, closeSelect, toggleSelect } = useSelect();
 
   const filteredHashtags = useMemo(() => {
     if (value.length === 0) return [];

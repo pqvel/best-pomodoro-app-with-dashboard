@@ -21,7 +21,7 @@ const priorities: Priority[] = [
 ];
 
 const Priorities: FC<Props> = ({ setPriority, activePriority }) => {
-  const { isOpen, openSelect, closeSelect, toggleSelect } = useSelect();
+  const { isOpen, closeSelect, toggleSelect } = useSelect();
 
   const handleChangePriority = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();

@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../core/redux/app/hooks";
 import { setTodoPopupActiveTodo } from "../../core/redux/slices/popupSlice";
 import { findTodo } from "../../core/utils/find";
 import { setCurrentTodoPomodoro } from "../../core/redux/slices/userSettingsSlice";
+import { deleteTodo } from "../../core/redux/slices/dashboardSlice";
 
 const TodosPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,13 @@ const TodosPage: FC = () => {
     dispatch(setCurrentTodoPomodoro({ dashboardId, sectionId, todoId }));
   };
 
+  const deleteTodoHandler = () => {
+    dispatch(deleteTodo({ dashboardId, sectionId, todoId }));
+    dispatch(
+      setCurrentTodoPomodoro({ dashboardId: "", sectionId: "", todoId: "" })
+    );
+  };
+
   return (
     <>
       <MainTemplate>
@@ -38,6 +46,7 @@ const TodosPage: FC = () => {
           todo={todo}
           setCurrentTodo={setCurrentTodo}
           closeHandler={closeActiveTodoPopup}
+          deleteTodo={deleteTodoHandler}
         />
       )}
     </>

@@ -1,8 +1,5 @@
-import type {
-  DashboardType,
-  SectionType,
-} from "../../redux/slices/dashboardSlice";
-import type { ITodo } from "../../models/TodoModel";
+import type { DashboardType } from "../../redux/slices/dashboardSlice";
+// import type { ITodo } from "../../models/TodoModel";
 
 export const findDashboard = (
   dashboards: DashboardType[],

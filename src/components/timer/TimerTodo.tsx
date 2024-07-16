@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ITodo } from "../../core/models/TodoModel";
+import type { ITodo } from "../../core/models/TodoModel";
 
 type Props = {
   todo: ITodo;

@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
 import Svg from "./Svg";
+import clsx from "clsx";
 
-const popupSizes: { small: string; medium: string; large: string } = {
+const popupSizes: any = {
   small: "max-w-sm",
   medium: "max-w-3xl",
   large: "max-w-5xl ",
@@ -28,7 +29,11 @@ const Popup: FC<Props> = ({
         onClick={closePopup}
       />
       <div
-        className={`fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%-32px)] bg-white p-5 rounded-lg z-10 ${popupSizes[size]} ${className}`}
+        className={clsx(
+          `fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%-32px)] bg-white p-5 rounded-lg z-10`,
+          popupSizes[size],
+          className
+        )}
       >
         {closePopup && (
           <button

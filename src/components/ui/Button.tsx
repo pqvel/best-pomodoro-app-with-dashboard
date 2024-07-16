@@ -12,13 +12,14 @@ const buttonStyles = {
   white: "border border-gray-300 bg-slate-50 hover:bg-slate-100 text-black",
   transparent: "bg-none text-black  hover:bg-gray-200",
   gray: "bg-gray-200 text-gray-500 hover:text-gray-600 hover:bg-gray-300",
+  red: "border border-red-500 bg-red-100 text-red-500 hover:text-red-600 hover:bg-red-200",
 };
 
 type ButtonProps = {
   children: ReactNode | ReactElement;
   disabled?: boolean;
   className?: string;
-  theme?: "black" | "white" | "transparent" | "gray";
+  theme?: "black" | "white" | "transparent" | "gray" | "red";
   iconId?: string;
   ref?: LegacyRef<HTMLButtonElement>;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;

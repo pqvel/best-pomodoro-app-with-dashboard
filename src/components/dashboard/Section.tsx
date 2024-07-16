@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useState } from "react";
+import { FC, MouseEvent } from "react";
 import { Svg, Button, Tooltip } from "../ui";
 import SwitchTextInput from "../switchTextInput/SwitchTextInput";
 import Todo from "./Todo";
@@ -23,8 +23,8 @@ const Section: FC<SectionProps> = ({ section, dashboardId }) => {
   const dispatch = useAppDispatch();
   const confirmPopup = usePopup();
   //
-  const [activeTodo, setActiveTodo] = useState();
-  const todoPopup = usePopup();
+  // const [activeTodo, setActiveTodo] = useState();
+  // const todoPopup = usePopup();
 
   const openDeleteSectionPopup = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();

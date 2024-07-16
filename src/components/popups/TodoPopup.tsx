@@ -4,19 +4,25 @@ import { Button, Popup } from "../ui";
 import Priorities from "../todoSettings/Priorities";
 import Hashtags from "../todoSettings/Hashtags";
 import { ITodo } from "../../core/models/TodoModel";
-import { useAppDispatch } from "../../core/redux/app/hooks";
+// import { useAppDispatch } from "..priority: numbea/../core/redux/app/hooks";
 import { setScrollHeight } from "../../core/utils/setScrollHeight";
 
 type Props = {
   todo: ITodo;
   closeHandler: () => void;
   setCurrentTodo: () => void;
+  deleteTodo: () => void;
 };
 
-const TodoPopup: FC<Props> = ({ todo, closeHandler, setCurrentTodo }) => {
-  const dispatch = useAppDispatch();
-  const [isChanged, setChanged] = useState<boolean>(false);
-  const [changedTodo, setChangedTodo] = useState<ITodo>(todo);
+const TodoPopup: FC<Props> = ({
+  todo,
+  closeHandler,
+  setCurrentTodo,
+  deleteTodo,
+}) => {
+  // const dispatch = useAppDispatch();
+  const [isChanged] = useState<boolean>(false);
+  const [__, setChangedTodo] = useState<ITodo>(todo);
 
   useEffect(() => {}, []);
 
@@ -34,7 +40,12 @@ const TodoPopup: FC<Props> = ({ todo, closeHandler, setCurrentTodo }) => {
   return (
     <Popup size="small" closePopup={closeHandler}>
       <div className="flex mb-4">
-        <Priorities activePriority={1} setPriority={(priority: number) => {}} />
+        <Priorities
+          activePriority={1}
+          setPriority={(priority: number) => {
+            return priority;
+          }}
+        />
         <Hashtags hashtags={[]} addHashtag={() => {}} />
       </div>
       <input
@@ -55,6 +66,7 @@ const TodoPopup: FC<Props> = ({ todo, closeHandler, setCurrentTodo }) => {
         confirmChanges={confirmChanges}
         rejectChanges={rejectChanges}
         setCurrentTodo={setCurrentTodoHandler}
+        deleteTodo={deleteTodo}
       />
     </Popup>
   );
@@ -67,13 +79,15 @@ type TodoPopupButtonsProps = {
   confirmChanges: () => void;
   rejectChanges: () => void;
   setCurrentTodo: () => void;
+  deleteTodo: () => void;
 };
 
 const TodoPopupButtons: FC<TodoPopupButtonsProps> = ({
   isChanged,
-  confirmChanges,
-  rejectChanges,
+  // confirmChanges,
+  // rejectChanges,
   setCurrentTodo,
+  deleteTodo,
 }) => {
   if (isChanged) {
     return (
@@ -88,6 +102,9 @@ const TodoPopupButtons: FC<TodoPopupButtonsProps> = ({
 
   return (
     <div className="flex justify-end">
+      <Button className="px-3 mr-2" theme="red" onClick={deleteTodo}>
+        Удалить
+      </Button>
       <Link
         className="flex items-center justify-center cursor-pointer rounded bg-slate-950 text-white hover:bg-black px-4 py-1"
         to="/"

@@ -2,7 +2,7 @@ import { FC } from "react";
 import type { Settings } from "../../core/redux/slices/userSettingsSlice";
 import { PomodoroStatus } from "./Timer";
 import { msToTime } from "../../core/utils/msToTime";
-import CircularProgressBar from "../ui/CircularProgressBar";
+// import CircularProgressBar from "../ui/CircularProgressBar";
 
 type TimerDisplayProps = {
   time: number;

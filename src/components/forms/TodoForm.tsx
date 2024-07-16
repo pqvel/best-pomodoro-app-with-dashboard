@@ -1,4 +1,4 @@
-import { useState, FC, useRef } from "react";
+import { useState, FC } from "react";
 import { Button, Svg } from "../ui";
 import Priorities from "../todoSettings/Priorities";
 import Hashtags from "../todoSettings/Hashtags";
