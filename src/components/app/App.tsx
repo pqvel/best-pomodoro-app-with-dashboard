@@ -1,5 +1,5 @@
 import { useEffect, FC } from "react";
-import { Routes, Route, HashRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 
 import TimerPage from "../pages/TimerPage";
 import TodosPage from "../pages/Todos";
@@ -14,13 +14,13 @@ const App: FC = () => {
 
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<TimerPage />} />
-        <Route path="/todos" element={<TodosPage />} />
-        <Route path="/stats" element={<StatsPage />} />
-        <Route path="/info" element={<InfoPage />} />
-        <Route path="/account" element={<AccountPage />} />
-      </Routes>
+      {/* <Routes> */}
+      <Route path="/" element={<TimerPage />} />
+      <Route path="/todos" element={<TodosPage />} />
+      <Route path="/stats" element={<StatsPage />} />
+      <Route path="/info" element={<InfoPage />} />
+      <Route path="/account" element={<AccountPage />} />
+      {/* </Routes> */}
     </HashRouter>
   );
 };
